@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "babel.config.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.9"
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
