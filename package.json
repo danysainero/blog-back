@@ -2,7 +2,7 @@
   "name": "kurso-back",
   "version": "1.0.0",
   "description": "",
-  "main": "babel.config.js",
+  "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.9.9"
@@ -12,10 +12,12 @@
     "@babel/preset-env": "^7.9.5",
     "@types/jest": "^25.2.1",
     "babel-jest": "^25.3.0",
-    "jest": "^25.3.0"
+    "jest": "^25.3.0",
+    "nodemon": "^1.19.4"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon . --watch"
   },
   "keywords": [],
   "author": "",
