@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient; 
+const mongoose = require('mongoose');
 
 const express = require('express');
 
@@ -10,14 +10,14 @@ app.use(express.json());
 
 async function dbConnect() {
 
-    let conn = await MongoClient.connect(url, {
+    await mongoose.connect(url, {
         useUnifiedTopology: true,
-        useNewUrlParser: true
+        useNewUrlParser: true,
+        useFindAndModify: false
     });
 
-    console.log("Connected to Mongo");
+    console.log("Connected to Mongo with Mongoose");
 
-    posts = conn.db().collection('post');
 }
 
 async function main() {
