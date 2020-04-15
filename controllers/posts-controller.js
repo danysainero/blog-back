@@ -16,20 +16,23 @@ class PostsController {
     return post;
   }
 
-  
   //Create a new post withOUT comments
   async createPost(newPost) {
     const myNewPost = await MyPostService.createPost(newPost);
     return myNewPost;
   }
 
-  
   //Modify one Post, but not the comments
   async modifyPost(modifiedPost) {
     const myNewPost = await MyPostService.modifyPost(modifiedPost);
     return myNewPost;
   }
+
   //Delete one Post by Id with its comments
-};
+  async deletePost(id) {
+    const deletedPost = await MyPostService.deletePost(id);
+    return deletedPost;
+  }
+}
 
 module.exports = PostsController;

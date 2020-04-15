@@ -26,7 +26,13 @@ class PostsService {
     const myNewPost = await MyPostsRepository.modifyPost(modifiedPost);
     return myNewPost;
   }
+
   //Delete one Post by Id with its comments
+  async deletePost(id) {
+    const deletedPost = await MyPostsRepository.deletePost(id);
+    return deletedPost;
+  }
+
 
 }
 

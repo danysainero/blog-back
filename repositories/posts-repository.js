@@ -1,11 +1,12 @@
 const postSchema = require("../models/post");
 
+
 class CommentsRepository {
   constructor() {}
 
   //Get all posts withOUT comments
   async getAllPosts() {
-    const posts = await postSchema.find({}, { postComments: 0 }).exec();
+    const posts = await postSchema.find({}).populate('Comments');
     return posts;
   }
 
@@ -22,19 +23,20 @@ class CommentsRepository {
     return myNewPost;
   }
 
-   //Modify one Post, but not the comments
-   async modifyPost(post) {
-    const {_id,  postBody } = post;
-    const modifiedPost = await postSchema.findByIdAndUpdate(_id,
-      { $set: { "postContent" : postBody }}); 
-      return modifiedPost; 
-   }
-   
+  //Modify one Post, but not the comments
+  async modifyPost(post) {
+    const { _id, postBody } = post;
+    const modifiedPost = await postSchema.findByIdAndUpdate(_id, {
+      $set: { postContent: postBody },
+    });
+    return modifiedPost;
+  }
+
   //Delete one Post by Id with its comments
   async deletePost(id) {
-    
+    const deletedPost = await postSchema.findByIdAndDelete(id);
+    return deletedPost;
   }
- 
 }
 
 module.exports = CommentsRepository;

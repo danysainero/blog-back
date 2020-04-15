@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const PostController = require("../controllers/posts-controller.js");
 const MyPostController = new PostController();
+const CommentsController = require("../controllers/comments-controller.js");
+const MyCommentsController = new CommentsController();
 
 // Get all posts
 router.get("/posts", async (req, res) => {
@@ -24,13 +26,24 @@ router.post("/posts", async (req, res) => {
 
 //Modify one Post, but not the comments
 router.put("/posts", async (req, res) => {
-   const modifiedPost = await MyPostController.modifyPost(req.body);
+  const modifiedPost = await MyPostController.modifyPost(req.body);
   res.json(modifiedPost);
 });
 
 //Delete one Post by Id with its comments
+router.delete("/posts/:id", async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const deletedPost = await MyPostController.deletePost(id);
+  
+  res.json(deletedPost);
+});
 
-//Add a comment from one Post by Id
+//Create a new comment 
+router.post("/comments", async (req, res) => {
+ const resComment = await MyCommentsController.createComment(req.body);
+  res.json(resComment);
+});
 
 //Modify a comment from one Post by Id
 
