@@ -13,7 +13,7 @@ async function dbConnect() {
   await mongoose.connect(mongoURI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useFindAndModify: false,
+    useFindAndModify: false
   });
 
   console.log("Connected to Mongo with Mongoose");

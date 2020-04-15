@@ -21,11 +21,19 @@ class CommentsRepository {
     const myNewPost = await myPost.save();
     return myNewPost;
   }
-  
+
    //Modify one Post, but not the comments
-   async modifyPost(postId, newPost) {}
+   async modifyPost(post) {
+    const {_id,  postBody } = post;
+    const modifiedPost = await postSchema.findByIdAndUpdate(_id,
+      { $set: { "postContent" : postBody }}); 
+      return modifiedPost; 
+   }
+   
   //Delete one Post by Id with its comments
-  async deletePost(id) {}
+  async deletePost(id) {
+    
+  }
  
 }
 

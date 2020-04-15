@@ -18,18 +18,17 @@ router.get("/posts/:id", async (req, res) => {
 
 //Create a new post withOUT comments
 router.post("/posts", async (req, res) => {
-  const newPost = {
-    postTitle: "Título de nuevo post",
-    postContent: "este post se ha creado mediante un POST",
-    postComments: [],
-  };
-  const resPost = await MyPostController.createPost(newPost);
+  const resPost = await MyPostController.createPost(req.body);
   res.json(resPost);
 });
 
-//Delete one Post by Id with its comments
-
 //Modify one Post, but not the comments
+router.put("/posts", async (req, res) => {
+   const modifiedPost = await MyPostController.modifyPost(req.body);
+  res.json(modifiedPost);
+});
+
+//Delete one Post by Id with its comments
 
 //Add a comment from one Post by Id
 

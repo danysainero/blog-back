@@ -23,10 +23,13 @@ class PostsController {
     return myNewPost;
   }
 
-  //Delete one Post by Id with its comments
-
-  //Modify one Post, but not the comments
   
+  //Modify one Post, but not the comments
+  async modifyPost(modifiedPost) {
+    const myNewPost = await MyPostService.modifyPost(modifiedPost);
+    return myNewPost;
+  }
+  //Delete one Post by Id with its comments
 };
 
 module.exports = PostsController;
