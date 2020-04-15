@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 
 const schema = mongoose.Schema({
-  title: String,
-  content: String,
-  comments: Array
+  postTitle: String,
+  postContent: String,
+  postComments: Array
 })
 
-module.exports = mongoose.model("Post", schema)
+module.exports = mongoose.model("Post", schema);

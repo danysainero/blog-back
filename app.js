@@ -1,11 +1,12 @@
-
 const mongoose = require("mongoose");
 const express = require("express");
 const routes = require("./routes/routes");
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoURI = process.env._URL;
 
-const mongoURI =
-  "mongodb://admin:admin@localhost:27018/blogDB?authSource=admin";
 const app = express();
+
 app.use(express.json());
 
 async function dbConnect() {
@@ -19,7 +20,6 @@ async function dbConnect() {
 }
 
 async function main() {
-  
   await dbConnect();
 
   app.use("/blog", routes);
