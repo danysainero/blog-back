@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "1a8d4380-d7bb-47ef-b02b-07dbf68cf7a9",
+		"name": "BlogAPI",
+		"description": "BlogAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "GET Posts (without comments)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/blog/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET One Post by Id (With comments) ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/blog/posts/5e95becd479add5e158d8d70",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"posts",
+								"5e95becd479add5e158d8d70"
+							]
+						},
+						"description": "GET One Post by Id (With comments) "
+					},
+					"response": []
+				},
+				{
+					"name": "POST a new post (without comments)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"postAuthorName\": \"Un nombreee\",\n\t\"postAuthorNickName\": \"My Nick\",\n    \"postTitle\": \"Título de nuevo post\",\n    \"postContent\": \"este es el contenido del post\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/blog/posts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"posts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT post but not the comments",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\" : \"5e971129d6a5eb81c5ac92e7\",\n    \"postBody\": \"bbbbbb\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/blog/posts/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"posts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE post (with comments)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/blog/posts/5e97580365c8d59780696366",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"posts",
+								"5e97580365c8d59780696366"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD Methods for posts",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "POST comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commentAuthorName\": \"erert34\",\n    \"commentContent\": \"ccccc\",\n    \"post\": \"5e9769e583374a9f3d6c85ac\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/blog/comments/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"comments",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD Methods for comments",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OffensiveWord",
+			"item": [],
+			"description": "CRUD Methods for OffensiveWord",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

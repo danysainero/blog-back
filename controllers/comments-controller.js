@@ -1,18 +1,36 @@
-const BlogService = require("../services/posts-service");
-const MyBlogService = new BlogService();
+const CommentsService = require("../services/comments-service");
 
 class CommentsController {
   constructor() {}
 
+  async getAllComments(req, res) {
+    try {
+      const comments = await CommentsService.getAllComments();
+      res.json(comments);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-//Add a comment from one Post by Id
+  async createComment(req, res) {
+    const newComment = await CommentsService.createComment(
+      req.params.postId,
+      req.body
+    );
+    res.json(newComment);
+  }
 
-//Modify a comment from one Post by Id
+  async modifyComment(req, res) {
+    const modifiedComment = await CommentsService.modifyComment(req.body);
+    res.json(modifiedComment);
+  }
 
-//Delete a comment from one Post by Id
+  async deleteComment(req, res) {
+    const deletedComment = await CommentsService.deleteComment(
+      req.params.commentId
+    );
+    res.json(deletedComment);
+  }
+}
 
-};
-
-module.exports = BlogController;
-
-
+module.exports = new CommentsController();

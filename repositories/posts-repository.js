@@ -1,40 +1,28 @@
 const postSchema = require("../models/post");
 
-class CommentsRepository {
+class PostRepository {
   constructor() {}
 
-  //Get all posts withOUT comments
   async getAllPosts() {
-    const posts = await postSchema.find({}, { postComments: 0 }).exec();
-    return posts;
+    return await postSchema.find({}).populate({path:'commentAuthorName'});
   }
 
-  //Get one Post by Id WITH comments
   async getPostById(postId) {
-    const post = await postSchema.findById(postId);
-    return post;
+    return await postSchema.findById(postId);
   }
 
-  //Create a new post withOUT comments
   async createPost(newPost) {
-    const myPost = new postSchema(newPost);
-    const myNewPost = await myPost.save();
-    return myNewPost;
+    return await postSchema(newPost).save();
   }
 
-   //Modify one Post, but not the comments
-   async modifyPost(post) {
-    const {_id,  postBody } = post;
-    const modifiedPost = await postSchema.findByIdAndUpdate(_id,
-      { $set: { "postContent" : postBody }}); 
-      return modifiedPost; 
-   }
-   
-  //Delete one Post by Id with its comments
-  async deletePost(id) {
-    
+  async modifyPost(post) {
+    const { _id, postBody } = post;
+    return await postSchema.findByIdAndUpdate(_id, {$set: { postContent: postBody }});
   }
- 
+
+  async deletePost(id) {
+    return await postSchema.findByIdAndDelete(id);
+  }
 }
 
-module.exports = CommentsRepository;
+module.exports = new PostRepository();
