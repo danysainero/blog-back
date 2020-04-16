@@ -6,8 +6,8 @@ class CommentsService {
 
   
   //Create a new post withOUT comments
-  async createComment(newComment) {
-    const myNewComment = await MyCommentsRepository.createComment(newComment);
+  async createComment(postId, newComment) {
+    const myNewComment = await MyCommentsRepository.createComment(postId, newComment);
     return myNewComment;
   }
 

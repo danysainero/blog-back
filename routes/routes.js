@@ -5,6 +5,9 @@ const MyPostController = new PostController();
 const CommentsController = require("../controllers/comments-controller.js");
 const MyCommentsController = new CommentsController();
 
+
+/******* POST ***********************************************************************/
+
 // Get all posts
 router.get("/posts", async (req, res) => {
   const posts = await MyPostController.getAllPosts();
@@ -39,9 +42,14 @@ router.delete("/posts/:id", async (req, res) => {
   res.json(deletedPost);
 });
 
+
+/******* COMMENTS ***********************************************************************/
+
+
 //Create a new comment 
-router.post("/comments", async (req, res) => {
- const resComment = await MyCommentsController.createComment(req.body);
+router.post("/comments/:id", async (req, res) => {
+  const postId = req.params.id;
+ const resComment = await MyCommentsController.createComment(postId, req.body);
   res.json(resComment);
 });
 

@@ -6,7 +6,9 @@ class CommentsRepository {
 
   //Get all posts withOUT comments
   async getAllPosts() {
-    const posts = await postSchema.find({}).populate('Comments');
+    const posts = await postSchema.find({}).populate({
+      path:'commentAuthorName',
+    });
     return posts;
   }
 

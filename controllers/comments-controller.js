@@ -6,8 +6,8 @@ class CommentsController {
 
 
 //Add a comment from one Post by Id
-async createComment(newComment) {
-  const myNewComment = await MyCommentsService.createComment(newComment);
+async createComment(postId, newComment) {
+  const myNewComment = await MyCommentsService.createComment(postId, newComment);
   return myNewComment;
 }
 //Modify a comment from one Post by Id
