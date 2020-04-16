@@ -1,26 +1,39 @@
 const offensiveWordSchema = require("../models/offensiveWord");
 
-class OffensiveWordRepository {
+class OffensivewordsRepository {
   constructor() {}
 
+  //Get all  OffensiveWords
+  async getAlloffensivewords() {
+    const offensivewords = await offensiveWordSchema.find({}).exec();
+    return offensivewords;
+  }
+  //Create new OffensiveWord
+  async createOffensiveword(newOffensiveword) {
+    const myNewOffensiveword = await offensiveWordSchema(
+      newOffensiveword
+    ).save();
+    return myNewOffensiveword;
+  }
+  //Modify an by Id
+  async modifyOffensiveword(offensivewordId, offensiveword) {
+    console.log(offensiveword);
 
-      //Get all  OffensiveWords
-      async getAllOffensiveWord() {
-      
-    }
-    //Create new OffensiveWord
-    async createOffensiveWord() {
-      
-    }
-    //Modify an by Id
-    async modifyOffensiveWord() {
-      
-    }
-    //Delete an OffensiveWords by Id
-    async deleteComment() {
-      
-    }
-
+    const modifiedOffensiveword = await offensiveWordSchema.findByIdAndUpdate(
+      offensivewordId,
+      {
+        $set: { word: offensiveword },
+      }
+    );
+    return modifiedOffensiveword;
+  }
+  //Delete an OffensiveWords by Id
+  async deleteOffensiveword(offensivewordId) {
+    const deletedOffensiveword = await offensiveWordSchema.findByIdAndDelete(
+      offensivewordId
+    );
+    return deletedOffensiveword;
+  }
 }
 
-module.exports = CommentsRepository;
+module.exports = OffensivewordsRepository;

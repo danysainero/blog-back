@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const PostController = require("../controllers/posts-controller.js");
+const PostController = require("../controllers/posts-controller");
+const OffensivewordsController = require("../controllers/offensivewords-controller");
+const CommentsController = require("../controllers/comments-controller");
 const MyPostController = new PostController();
-const CommentsController = require("../controllers/comments-controller.js");
 const MyCommentsController = new CommentsController();
+const MyOffensivewordsController = new OffensivewordsController();
 
 /******* POST ***********************************************************************/
 
@@ -68,4 +70,33 @@ router.delete("/comments/:commentId", async (req, res) => {
   const deletedComment = await MyCommentsController.deleteComment(commentId);
   res.json(deletedComment);
 });
+
+/******* OFFENSIVEWORDS ***********************************************************************/
+//GET all offensivewords
+router.get("/offensivewords", async (req, res) => {
+  const offensivewords = await MyOffensivewordsController.getAllOffensivewords();
+  res.json(offensivewords);
+});
+
+//Create a new offensiveword
+router.post("/offensivewords", async (req, res) => {
+  const newOffensiveword = await MyOffensivewordsController.createOffensiveword(req.body);
+  res.json(newOffensiveword);
+});
+
+//Modify a offensiveword 
+router.put("/offensivewords/:offensivewordId", async (req, res) => {
+  const offensivewordId = req.params.offensivewordId;
+  const modifiedOffensiveword = await MyOffensivewordsController.modifyOffensiveword(offensivewordId, req.body.word);
+  res.json(modifiedOffensiveword);
+});
+
+
+//Delete a offensiveword 
+router.delete("/offensivewords/:offensivewordId", async (req, res) => {
+  const offensivewordId = req.params.offensivewordId;
+  const deletedOffensiveword = await MyOffensivewordsController.deleteOffensiveword(offensivewordId);
+  res.json(deletedOffensiveword);
+});
+
 module.exports = router;
