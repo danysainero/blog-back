@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const routes = require("./routes/routes");
 const dotenv = require("dotenv");
 dotenv.config();
 const mongoURI = process.env._URL;
@@ -13,7 +12,7 @@ async function dbConnect() {
   await mongoose.connect(mongoURI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   });
 
   console.log("Connected to Mongo with Mongoose");
@@ -22,7 +21,9 @@ async function dbConnect() {
 async function main() {
   await dbConnect();
 
-  app.use("/blog", routes);
+  app.use("/blog", require("./routes/postRoutes")); //API Post
+  app.use("/blog", require("./routes/commentRoutes")); //API Comments
+  app.use("/blog", require("./routes/offensivewordRoutes")); //API Offensivewords
 
   app.listen(3000, () => console.log("Server started in port 3000"));
 }

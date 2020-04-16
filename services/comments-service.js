@@ -1,33 +1,23 @@
 const CommentsRepository = require("../repositories/comments-repository");
-const MyCommentsRepository = new CommentsRepository();
 
 class CommentsService {
   constructor() {}
 
-  //GET all comments
-  async getAllComments(){
-    const comments = await MyCommentsRepository.getAllComments();
-    return comments;
+  async getAllComments() {
+    return await CommentsRepository.getAllComments();
   }
 
-  //Create a new comment
-  async createComment(newComment) {
-    const myNewComment = await MyCommentsRepository.createComment(newComment);
-    return myNewComment;
+  async createComment(postId, newComment) {
+     return await CommentsRepository.createComment(postId, newComment);
   }
 
-   //Modify a comment from one Post by Id
-   async modifyComment(comment) {
-    const modifiedComment = await MyCommentsRepository.modifyComment(comment);
-    return modifiedComment;
-   }
+  async modifyComment(comment) {
+    return await CommentsRepository.modifyComment(comment);
+  }
 
-  //Delete a comment from one Post by Id
-async deleteComment(commentId) {
-  const deletedComment = await MyCommentsRepository.deleteComment(commentId);
-  return deletedComment;
+  async deleteComment(commentId) {
+    return await CommentsRepository.deleteComment(commentId);
+  }
 }
 
-}
-
-module.exports = CommentsService;
+module.exports = new CommentsService();

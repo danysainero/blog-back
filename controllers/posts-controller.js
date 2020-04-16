@@ -1,38 +1,33 @@
 const PostService = require("../services/posts-service");
-const MyPostService = new PostService();
 
 class PostsController {
   constructor() {}
 
-  //Get all posts withOUT comments
-  async getAllPosts() {
-    const posts = await MyPostService.getAllPosts();
-    return posts;
+  async getAllPosts(req, res) {
+    const posts = await PostService.getAllPosts();
+    res.json(posts);
   }
 
-  //Get one Post by Id WITH comments
-  async getPostById(postId) {
-    const post = await MyPostService.getPostById(postId);
-    return post;
+  async getPostById(req, res) {
+    const post = await PostService.getPostById(req.params.id);
+    res.json(post);
   }
 
-  //Create a new post withOUT comments
-  async createPost(newPost) {
-    const myNewPost = await MyPostService.createPost(newPost);
-    return myNewPost;
+  async createPost(req, res) {
+    const newPost = await PostService.createPost(req.body);
+    res.json(newPost);
   }
 
-  //Modify one Post, but not the comments
-  async modifyPost(modifiedPost) {
-    const myNewPost = await MyPostService.modifyPost(modifiedPost);
-    return myNewPost;
+  async modifyPost(req, res) {
+    const modifiedPost = await PostService.modifyPost(req.body);
+    res.json(modifiedPost);
   }
 
-  //Delete one Post by Id with its comments
-  async deletePost(id) {
-    const deletedPost = await MyPostService.deletePost(id);
-    return deletedPost;
+  async deletePost(req, res) {
+    const deletedPost = await PostService.deletePost(req.params.id);
+    res.json(deletedPost);
   }
 }
 
-module.exports = PostsController;
+module.exports = new PostsController();
+

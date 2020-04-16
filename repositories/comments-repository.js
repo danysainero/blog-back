@@ -37,4 +37,4 @@ class CommentsRepository {
   }
 }
 
-module.exports = CommentsRepository;
+module.exports = new CommentsRepository();
