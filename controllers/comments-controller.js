@@ -4,12 +4,16 @@ class CommentsController {
   constructor() {}
 
   async getAllComments(req, res) {
-    const comments = await CommentsService.getAllComments();
-    res.json(comments);
+    try {
+      const comments = await CommentsService.getAllComments();
+      res.json(comments);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   async createComment(req, res) {
-   const newComment = await CommentsService.createComment(
+    const newComment = await CommentsService.createComment(
       req.params.postId,
       req.body
     );

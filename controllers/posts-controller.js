@@ -4,30 +4,49 @@ class PostsController {
   constructor() {}
 
   async getAllPosts(req, res) {
-    const posts = await PostService.getAllPosts();
-    res.json(posts);
+    try {
+      const posts = await PostService.getAllPosts();
+      res.json(posts);
+    } catch (err) {
+      console.error("ERROR: ", err.message);
+    }
   }
 
   async getPostById(req, res) {
-    const post = await PostService.getPostById(req.params.id);
-    res.json(post);
+    try {
+      const post = await PostService.getPostById(req.params.id);
+      res.json(post);
+    } catch (err) {
+      console.error("ERROR: ", err.message);
+    }
   }
 
   async createPost(req, res) {
-    const newPost = await PostService.createPost(req.body);
-    res.json(newPost);
+    try {
+      const newPost = await PostService.createPost(req.body);
+      res.json(newPost);
+    } catch (err) {
+      console.error("ERROR: ", err.message);
+    }
   }
 
   async modifyPost(req, res) {
-    const modifiedPost = await PostService.modifyPost(req.body);
-    res.json(modifiedPost);
+    try {
+      const modifiedPost = await PostService.modifyPost(req.body);
+      res.json(modifiedPost);
+    } catch (err) {
+      console.error("ERROR: ", err.message);
+    }
   }
 
   async deletePost(req, res) {
-    const deletedPost = await PostService.deletePost(req.params.id);
-    res.json(deletedPost);
+    try {
+      const deletedPost = await PostService.deletePost(req.params.id);
+      res.json(deletedPost);
+    } catch (err) {
+      console.error("ERROR: ", err.message);
+    }
   }
 }
 
 module.exports = new PostsController();
-
