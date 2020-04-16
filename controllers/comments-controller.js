@@ -1,38 +1,36 @@
 const CommentsService = require("../services/comments-service");
-const MyCommentsService = new CommentsService();
 
 class CommentsController {
   constructor() {}
 
-//GET all comments
-async getAllComments() {
-  const comments = await MyCommentsService.getAllComments();
-  return comments;
+  async getAllComments(req, res) {
+    try {
+      const comments = await CommentsService.getAllComments();
+      res.json(comments);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async createComment(req, res) {
+    const newComment = await CommentsService.createComment(
+      req.params.postId,
+      req.body
+    );
+    res.json(newComment);
+  }
+
+  async modifyComment(req, res) {
+    const modifiedComment = await CommentsService.modifyComment(req.body);
+    res.json(modifiedComment);
+  }
+
+  async deleteComment(req, res) {
+    const deletedComment = await CommentsService.deleteComment(
+      req.params.commentId
+    );
+    res.json(deletedComment);
+  }
 }
-  
 
-//Add a comment from one Post by Id
-async createComment(postId, newComment) {
-  const myNewComment = await MyCommentsService.createComment(postId, newComment);
-  return myNewComment;
-}
-
-//Modify a comment from one Post by Id
-async modifyComment(comment) {
-  const modifiedComment = await MyCommentsService.modifyComment(comment);
-  return modifiedComment;
-}
-
-//Delete a comment from one Post by Id
-async deleteComment(commentId) {
-  const deletedComment = await MyCommentsService.deleteComment(commentId);
-  return deletedComment;
-}
-
-
-
-};
-
-module.exports = CommentsController;
-
-
+module.exports = new CommentsController();
