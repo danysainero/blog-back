@@ -11,8 +11,8 @@ class CommentsService {
   }
 
   //Create a new comment
-  async createComment(postId, newComment) {
-    const myNewComment = await MyCommentsRepository.createComment(postId, newComment);
+  async createComment(newComment) {
+    const myNewComment = await MyCommentsRepository.createComment(newComment);
     return myNewComment;
   }
 

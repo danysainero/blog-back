@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const commentSchema = require("../models/comment");
 const postSchema = require("../models/post");
 
