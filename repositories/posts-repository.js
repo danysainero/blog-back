@@ -4,24 +4,48 @@ class PostRepository {
   constructor() {}
 
   async getAllPosts() {
-    return await postSchema.find({}).populate({path:'commentAuthorName'});
+    try {
+      return await postSchema.find({});     
+      /*  return await postSchema.find({}, {comments:0}); */
+
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   async getPostById(postId) {
-    return await postSchema.findById(postId);
+    try {
+      return await postSchema.findById(postId);
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   async createPost(newPost) {
-    return await postSchema(newPost).save();
+    try {
+      return await postSchema(newPost).save();
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   async modifyPost(post) {
     const { _id, postBody } = post;
-    return await postSchema.findByIdAndUpdate(_id, {$set: { postContent: postBody }});
+    try {
+      return await postSchema.findByIdAndUpdate(_id, {
+        $set: { postContent: postBody },
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   async deletePost(id) {
-    return await postSchema.findByIdAndDelete(id);
+    try {
+      return await postSchema.findByIdAndDelete(id);
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 }
 
