@@ -4,36 +4,43 @@ const postSchema = require("../models/post");
 class CommentsRepository {
   constructor() {}
 
-  //GET all comments
   async getAllComments() {
-    const comments = await commentSchema.find({}).exec();
-    return comments;
+    try {
+    return await commentSchema.find({}).exec();
+     } catch (err) {
+      console.log(err.message);
+   }
   }
 
-  //Add a comment from one Post by Id
   async createComment(postId, newComment) {
+    try {
     const myComment = new commentSchema(newComment);
-    const myNewComment = await myComment.save();
-    const commentAdded = await postSchema
-      .findByIdAndUpdate(postId, { $push: { comments: myComment } })
-      .exec();
-    return commentAdded;
+    await myComment.save();
+    return await postSchema
+      .findByIdAndUpdate(postId, { $push: { comments: myComment } });
+     } catch (err) {
+      console.log(err.message);
+   }
   }
 
-  //Modify a comment from one Post by Id
   async modifyComment(comment) {
-    
+    try {
     const { _id, commentContent } = comment;
     const modifiedComment = await commentSchema.findByIdAndUpdate(_id, {
       $set: { commentContent : commentContent },
     });
     return modifiedComment;
+     } catch (err) {
+      console.log(err.message);
+   }
   }
-
-  //Delete a comment from one Post by Id
   async deleteComment(commentId) {
+    try {
     const deletedComment = await commentSchema.findByIdAndDelete(commentId);
     return deletedComment;
+     } catch (err) {
+      console.log(err.message);
+   }
   }
 }
 

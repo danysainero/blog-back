@@ -4,46 +4,30 @@ class OffensivewordsController {
   constructor() {}
 
   async getAllOffensivewords(req, res) {
-    try {
-      const offensivewords = await OffensivewordsService.getAllOffensivewords();
-      res.json(offensivewords);
-    } catch (err) {
-      console.error("ERROR: ", err.message);
-    }
+    const offensivewords = await OffensivewordsService.getAllOffensivewords();
+    res.json(offensivewords);
   }
 
   async createOffensiveword(req, res) {
-    try {
-      const newOffensiveword = await OffensivewordsService.createOffensiveword(
-        req.body
-      );
-      res.json(newOffensiveword);
-    } catch (err) {
-      console.error("ERROR: ", err.message);
-    }
+    const newOffensiveword = await OffensivewordsService.createOffensiveword(
+      req.body
+    );
+    res.json(newOffensiveword);
   }
 
   async modifyOffensiveword(req, res) {
-    try {
-      const modifiedOffensiveword = await OffensivewordsService.modifyOffensiveword(
-        req.params.offensivewordId,
-        req.body.word
-      );
-      res.json(modifiedOffensiveword);
-    } catch (err) {
-      console.error("ERROR: ", err.message);
-    }
+    const modifiedOffensiveword = await OffensivewordsService.modifyOffensiveword(
+      req.params.offensivewordId,
+      req.body.word
+    );
+    res.json(modifiedOffensiveword);
   }
 
   async deleteOffensiveword(req, res) {
-    try {
-      const deletedOffensiveword = await OffensivewordsService.deleteOffensiveword(
-        req.params.offensivewordId
-      );
-      res.json(deletedOffensiveword);
-    } catch (err) {
-      console.error("ERROR: ", err.message);
-    }
+    const deletedOffensiveword = await OffensivewordsService.deleteOffensiveword(
+      req.params.offensivewordId
+    );
+    res.json(deletedOffensiveword);
   }
 }
 
