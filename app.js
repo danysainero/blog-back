@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
-const WordsValidator = require("./validators/validator");
+const WordsValidator = require("./validators/offensive-words-list");
 dotenv.config();
 const mongoURI = process.env._URL;
 const PORT = process.env._PORT || 3001;
