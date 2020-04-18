@@ -15,12 +15,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/blog/posts",
+							"raw": "http://localhost:3001/blog/posts",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"blog",
 								"posts"
@@ -35,16 +35,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/blog/posts/5e95becd479add5e158d8d70",
+							"raw": "http://localhost:3001/blog/posts/5e99924075002bef8fafa9c6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"blog",
 								"posts",
-								"5e95becd479add5e158d8d70"
+								"5e99924075002bef8fafa9c6"
 							]
 						},
 						"description": "GET One Post by Id (With comments) "
@@ -58,7 +58,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"postAuthorName\": \"Un nombreee\",\n\t\"postAuthorNickName\": \"My Nick\",\n    \"postTitle\": \"Título de nuevo post\",\n    \"postContent\": \"este es el contenido del post\"\n  }",
+							"raw": "{\n\t\"postAuthorName\": \"zzzzzz\",\n\t\"postAuthorNickName\": \"My Nick\",\n    \"postTitle\": \"Título de nuevo post\",\n    \"postContent\": \"este es el contenido del post\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -66,12 +66,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/blog/posts/",
+							"raw": "http://localhost:3001/blog/posts/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"blog",
 								"posts",
@@ -96,12 +96,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/blog/posts/",
+							"raw": "http://localhost:3001/blog/posts/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"blog",
 								"posts",
@@ -117,12 +117,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/blog/posts/5e97580365c8d59780696366",
+							"raw": "http://localhost:3001/blog/posts/5e97580365c8d59780696366",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
 							"path": [
 								"blog",
 								"posts",
@@ -146,7 +146,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"commentAuthorName\": \"erert34\",\n    \"commentContent\": \"ccccc\",\n    \"post\": \"5e9769e583374a9f3d6c85ac\"\n}",
+							"raw": "{\n    \"commentAuthorName\": \"bbbbb\",\n    \"commentContent\": \"comentario\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -154,12 +154,83 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/blog/comments/",
+							"raw": "http://localhost:3001/blog/comments/5e99924075002bef8fafa9c6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3001",
+							"path": [
+								"blog",
+								"comments",
+								"5e99924075002bef8fafa9c6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE comment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/blog/comments/5e988c4478bb3ec759e2d292",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"blog",
+								"comments",
+								"5e988c4478bb3ec759e2d292"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\" : \"5e9779519337c4a58e6a4475\",\n\t\"commentContent\":\"wef modificado\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/blog/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"blog",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/blog/comments/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
 							"path": [
 								"blog",
 								"comments",
@@ -175,7 +246,109 @@
 		},
 		{
 			"name": "OffensiveWord",
-			"item": [],
+			"item": [
+				{
+					"name": "GET all offensivewords",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/blog/offensivewords/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"blog",
+								"offensivewords",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST offensiveword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"word\" : \"pis\",\n\t\"level\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/blog/offensivewords",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"blog",
+								"offensivewords"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT offensiveword",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"word\" : \"pene\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/blog/offensivewords/5e986365c3a25eb47b017b95",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"blog",
+								"offensivewords",
+								"5e986365c3a25eb47b017b95"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE offensiveword",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/blog/offensivewords/5e9966ee756378e248767cff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"blog",
+								"offensivewords",
+								"5e9966ee756378e248767cff"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"description": "CRUD Methods for OffensiveWord",
 			"protocolProfileBehavior": {}
 		}
