@@ -5,9 +5,8 @@ class PostRepository {
 
   async getAllPosts() {
     try {
-      return await postSchema.find({});     
+     return await postSchema.find({});     
       /*  return await postSchema.find({}, {comments:0}); */
-
     } catch (err) {
       console.log(err.message);
     }
@@ -15,7 +14,7 @@ class PostRepository {
 
   async getPostById(postId) {
     try {
-      return await postSchema.findById(postId);
+      return await postSchema.findById(postId).populate('comments').exec();
     } catch (err) {
       console.log(err.message);
     }
