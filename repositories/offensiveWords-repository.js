@@ -8,7 +8,8 @@ class OffensivewordsRepository {
     try {
       return await offensiveWordSchema.find({}).exec();
        } catch (err) {
-      console.log(err);
+      console.log(err.message);
+      return err.message
    }
   }
 
@@ -17,24 +18,36 @@ class OffensivewordsRepository {
       return await offensiveWordSchema(newOffensiveword).save();
        } catch (err) {
       console.log(err.message);
+      return err.message
    }
   }
 
   async modifyOffensiveword(offensivewordId, offensiveword) {
     try {
-      return await offensiveWordSchema.findByIdAndUpdate(offensivewordId, {
+      const modifiedOffensiveWord = await offensiveWordSchema.findByIdAndUpdate(offensivewordId, {
       $set: { word: offensiveword },
-    });
+      },{ new: true }
+    );
+    return modifiedOffensiveWord;
      } catch (err) {
        console.log(err.message);
+       return err.message
    }
   }
 
   async deleteOffensiveword(offensivewordId) {
     try {
-      return await offensiveWordSchema.findByIdAndDelete( offensivewordId );
-       } catch (err) {
+      const deletedOffensiveword = await offensiveWordSchema.findByIdAndDelete( offensivewordId );
+      if (!deletedOffensiveword) {
+        throw new Error(
+          `La palabra con ese Id no existe`
+        );
+      }
+      return deletedOffensiveword;
+    
+    } catch (err) {
        console.log(err.message);
+       return err.message
    }
   }
 
@@ -43,6 +56,7 @@ class OffensivewordsRepository {
      await offensiveWordSchema.insertMany(initOffensiveWordsList);
    } catch (err) {
     console.log(err.message);
+    return err.message
    }
   } 
 }

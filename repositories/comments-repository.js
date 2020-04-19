@@ -6,41 +6,63 @@ class CommentsRepository {
 
   async getAllComments() {
     try {
-    return await commentSchema.find({}).exec();
-     } catch (err) {
+     const allComments = await commentSchema.find({}).exec();
+     if (!allComments.length) {
+      throw new Error(
+        `No existen comentarios`
+      );
+     }
+      return allComments
+    } catch (err) {
       console.log(err.message);
-   }
+      return err.message;
+    }
   }
 
-  async createComment(postId, newComment) {
+  async createComment(postId, comment) {
     try {
-    const myComment = new commentSchema(newComment);
-    await myComment.save();
-    return await postSchema
-      .findByIdAndUpdate(postId, { $push: { comments: myComment } });
-     } catch (err) {
+      const newComment = new commentSchema(comment);
+      await newComment.save();
+      await postSchema.findByIdAndUpdate(postId, {$push: { comments: newComment }});
+      return newComment;
+    } catch (err) {
       console.log(err.message);
-   }
+      return err.message;
+    }
   }
 
-  async modifyComment(comment) {
+  async modifyComment(commentId, comment) {
     try {
-    const { _id, commentContent } = comment;
-    const modifiedComment = await commentSchema.findByIdAndUpdate(_id, {
-      $set: { commentContent : commentContent },
-    });
-    return modifiedComment;
-     } catch (err) {
+      const modifiedComment = await commentSchema.findByIdAndUpdate(
+        commentId,
+        {
+          $set: { commentContent: comment.commentContent },
+        }, {new: true}
+      );
+      if (!modifiedComment) {
+        throw new Error(
+          `El comentario con ese Id no existe`
+        );}
+      return modifiedComment;
+    } catch (err) {
       console.log(err.message);
-   }
+      return err.message
+    }
   }
+
   async deleteComment(commentId) {
     try {
-    const deletedComment = await commentSchema.findByIdAndDelete(commentId);
-    return deletedComment;
-     } catch (err) {
+      const deletedComment = await commentSchema.findByIdAndDelete(commentId);
+      if (!deletedComment) {
+        throw new Error(
+          `El comentario con ese Id no existe`
+        );
+      }
+      return deletedComment;
+    } catch (err) {
       console.log(err.message);
-   }
+      return err.message;
+    }
   }
 }
 
