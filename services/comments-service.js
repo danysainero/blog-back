@@ -1,4 +1,5 @@
 const CommentsRepository = require("../repositories/comments-repository");
+const OffensiveWordsIncludes = require("../validators/offensive-words-includes");
 
 class CommentsService {
   constructor() {}
@@ -8,11 +9,15 @@ class CommentsService {
   }
 
   async createComment(postId, newComment) {
-     return await CommentsRepository.createComment(postId, newComment);
+    try {
+      return await CommentsRepository.createComment(postId, newComment);
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
-  async modifyComment(comment) {
-    return await CommentsRepository.modifyComment(comment);
+  async modifyComment(commentId,comment) {
+    return await CommentsRepository.modifyComment(commentId,comment);
   }
 
   async deleteComment(commentId) {
