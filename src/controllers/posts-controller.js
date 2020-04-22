@@ -6,7 +6,7 @@ class PostsController {
   async getAllPosts(req, res , next) {
     try{
       const posts = await PostService.getAllPosts();
-      res.json(posts);
+      res.status(200).send(posts);
     }catch(err) {
         console.log(err);
         res.status(500).send(err);
@@ -41,7 +41,8 @@ class PostsController {
 
   async modifyPost(req, res , next) {
     try{
-      const modifiedPost = await PostService.modifyPost(req.body);
+
+      const modifiedPost = await PostService.modifyPost(req.params.id, req.body);
       res.json(modifiedPost);
       }catch(err) {
         console.log(err);

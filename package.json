@@ -14,10 +14,12 @@
     "@types/jest": "^25.2.1",
     "babel-jest": "^25.3.0",
     "jest": "^25.3.0",
-    "nodemon": "^1.19.4"
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles --force-exit",
+    "test:coverage": "jest --collect-coverage --detectOpenHandles --force-exit",
     "dev": "nodemon . --watch"
   },
   "keywords": [],
