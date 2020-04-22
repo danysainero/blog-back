@@ -30,9 +30,9 @@ class UsersService {
     }
   }
 
-  async login(body) {
+  async findUser(body) {
     try {
-      return await UsersRepository.login(body);
+      return await UsersRepository.findUser(body);
     } catch (err) {
       console.log(err.message);
       return err.message;

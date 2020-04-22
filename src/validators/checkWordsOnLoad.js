@@ -6,17 +6,14 @@ class checkWordsOnLoad {
 
   async checkWordsOnLoad() {
     const offensiveWords = await OffensiveWordsRepository.getAlloffensivewords();
-    this.checkOffensiveWordsList(offensiveWords);
-  }
-
-  async checkOffensiveWordsList(offensiveWords) {
-    Array.from(offensiveWords).length > 0
+    return Array.from(offensiveWords).length > 0
       ? "offensiveWordsList exist"
       : this.addOffensiveWordsList();
   }
 
   async addOffensiveWordsList() {
     await OffensiveWordsRepository.addOffensivewordsOnLoad();
+    return "offensiveWordsList created on Load"
   }
 }
 

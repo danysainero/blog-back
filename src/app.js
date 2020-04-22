@@ -19,7 +19,7 @@ app.use("/blog", require("./routes/loginRoutes")); //API Offensivewords */
 
 (async function main() {
   await dbConnect();
-  app.listen(process.env._PORT, () => console.log(`Mongo & Server started in port ${process.env._PORT}`));
+  app.listen(process.env._PORT);
 })();
 
 module.exports = app;

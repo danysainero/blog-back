@@ -41,7 +41,7 @@ class UsersController {
 
   async login(req, res , next) {
     try{
-      const loginStatus = await userService.login(req.body);
+      const loginStatus = await userService.findUser(req.body);
       res.json(loginStatus);
       }catch(err) {
         console.log(err);

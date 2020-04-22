@@ -6,7 +6,7 @@ class BasicAuthMiddleware {
   
     async basicAuth(req, res, next) {
       const { userName , pass } = req.body;
-  const userExist = await usersRepository.login(req.body);
+  const userExist = await usersRepository.findUser(req.body);
   console.log(userExist);
   
      /*  if (username == 'admin' && password == 'pass') {
