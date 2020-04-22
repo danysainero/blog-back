@@ -30,9 +30,9 @@ class PostsService {
     }
   }
 
-  async modifyPost(modifiedPost) {
+  async modifyPost(postId, modifiedPost) {
     try {
-      return await PostsRepository.modifyPost(modifiedPost);
+      return await PostsRepository.modifyPost(postId, modifiedPost);
     } catch (err) {
       console.log(err.message);
       return err.message;
