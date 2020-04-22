@@ -1,5 +1,5 @@
 const offensiveWordSchema = require("../models/offensiveWord");
-const initOffensiveWordsList = require('../data/offensiveWords-list.json');
+const initOffensiveWordsList = require('../../data/offensiveWords-list.json');
 
 class OffensivewordsRepository {
   constructor() {}

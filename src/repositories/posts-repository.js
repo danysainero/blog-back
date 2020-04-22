@@ -5,18 +5,20 @@ class PostRepository {
 
   async getAllPosts() {
     try {
-     return await postSchema.find({});     
-      /*  return await postSchema.find({}, {comments:0}); */
+      return await postSchema.find({}).populate("comments");
+      /*  return await postSchema.find({}, {comments:0}).populate('comments commentContent').exec(); */
     } catch (err) {
       console.log(err.message);
+      return err.message;
     }
   }
 
   async getPostById(postId) {
     try {
-      return await postSchema.findById(postId).populate('comments').exec();
+      return await postSchema.findById(postId).populate("comments").exec();
     } catch (err) {
       console.log(err.message);
+      return err.message;
     }
   }
 
@@ -25,17 +27,24 @@ class PostRepository {
       return await postSchema(newPost).save();
     } catch (err) {
       console.log(err.message);
+      return err.message;
     }
   }
 
-  async modifyPost(post) {
-    const { _id, postBody } = post;
+  async modifyPost(postId, post) {
+  
     try {
-      return await postSchema.findByIdAndUpdate(_id, {
-        $set: { postContent: postBody },
-      });
+      const modifiedPost = await postSchema.findByIdAndUpdate(
+        postId,
+        {
+          $set: { postContent: post.postContent },
+        },
+        { new: true }
+      );
+      return modifiedPost;
     } catch (err) {
       console.log(err.message);
+      return err.message;
     }
   }
 
@@ -44,6 +53,7 @@ class PostRepository {
       return await postSchema.findByIdAndDelete(id);
     } catch (err) {
       console.log(err.message);
+      return err.message;
     }
   }
 }

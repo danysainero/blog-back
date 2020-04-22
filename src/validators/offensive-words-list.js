@@ -3,6 +3,7 @@ const OffensiveWordsRepository = require("../repositories/offensiveWords-reposit
 class WordsValidator {
   constructor() {}
 
+
   async checkWordsOnLoad() {
     const offensiveWords = await OffensiveWordsRepository.getAlloffensivewords();
     this.checkOffensiveWordsList(offensiveWords);
@@ -15,7 +16,7 @@ class WordsValidator {
   }
 
   async addOffensiveWordsList() {
-    const offensiveWords = await OffensiveWordsRepository.addOffensivewordsOnLoad();
+    await OffensiveWordsRepository.addOffensivewordsOnLoad();
   }
 }
 
