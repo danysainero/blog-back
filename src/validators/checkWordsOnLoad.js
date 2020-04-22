@@ -1,6 +1,6 @@
 const OffensiveWordsRepository = require("../repositories/offensiveWords-repository");
 
-class WordsValidator {
+class checkWordsOnLoad {
   constructor() {}
 
 
@@ -20,4 +20,4 @@ class WordsValidator {
   }
 }
 
-module.exports = new WordsValidator();
+module.exports = new checkWordsOnLoad();
