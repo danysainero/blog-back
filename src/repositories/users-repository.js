@@ -5,6 +5,46 @@ const initAdminsList = require('../../data/admins-list.json');
 class UserRepository {
   constructor() {}
 
+//USERS
+async getAllUsers(){
+  try {
+  const users = userSchema.find({},{__v:0,createdAt:0, updatedAt:0});
+  return users;
+  }
+  catch(err){
+    console.log(err.message);
+    return err.message
+  }
+}
+
+//POST user by Id
+async createUser(newUser){
+  try {
+  const deletedUser = await userSchema(newUser).save();
+  return deletedUser;
+  }
+  catch(err){
+    console.log(err.message);
+    return err.message
+  }
+}
+
+
+//Delete user
+async deleteUser(userId){
+  try {
+  const deletedUser = await userSchema.findByIdAndDelete(userId);
+  return deletedUser;
+  }
+  catch(err){
+    console.log(err.message);
+    return err.message
+  }
+}
+
+
+//ADMINS
+
   async getAllAdmins() {
     try {
       return await userSchema.find({})
