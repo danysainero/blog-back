@@ -29,9 +29,10 @@ class UserRepository {
   //POST user by Id
   async createUser(newUser) {
     try {
-      const deletedUser = await userSchema(newUser).save();
-      return deletedUser;
+      const createdUser = await userSchema(newUser).save();
+      return createdUser;
     } catch (err) {
+      err.code === 11000 ? err.message = "El nombre de usuario ya existe" :  err.message;     
       console.log(err.message);
       return err.message;
     }

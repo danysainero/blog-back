@@ -5,6 +5,7 @@ class PostRepository {
 
   async getAllPosts() {
     try {
+
       return await postSchema.find({}).populate("comments");
       /*  return await postSchema.find({}, {comments:0}).populate('comments commentContent').exec(); */
     } catch (err) {
