@@ -29,6 +29,17 @@ class UsersService {
       return err.message;
     }
   }
+
+  async login(body) {
+    try {
+      return await UsersRepository.login(body);
+    } catch (err) {
+      console.log(err.message);
+      return err.message;
+    }
+  }
+
+
 }
 
 module.exports = new UsersService();

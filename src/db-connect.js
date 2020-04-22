@@ -12,6 +12,7 @@ const connectToDb = async () => {
                 auth: { "authSource": "admin" },
                 user: "admin",
                 pass: "admin",
+                useCreateIndex: true,
                 useUnifiedTopology: true,
                 useNewUrlParser: true,
                 useFindAndModify: false

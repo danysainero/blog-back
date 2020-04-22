@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema(
     userName: {
       type: String,
       required: true,
+      index: { unique: true }
     },
     pass: {
       type: String,

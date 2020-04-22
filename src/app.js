@@ -14,6 +14,7 @@ app.use("/blog", require("./routes/postRoutes")); //API Post
 app.use("/blog", require("./routes/commentRoutes")); //API Comments
 app.use("/blog", require("./routes/offensivewordRoutes")); //API Offensivewords */
 app.use("/blog", require("./routes/userRoutes")); //API Offensivewords */
+app.use("/blog", require("./routes/loginRoutes")); //API Offensivewords */
 
 
 (async function main() {
