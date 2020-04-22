@@ -1,28 +1,20 @@
-const passport = require('passport');
-const BasicStrategy = require('passport-http').BasicStrategy;
-const usersRepository = require('../repositories/users-repository')
+const passport = require("passport");
+const BasicStrategy = require("passport-http").BasicStrategy;
+const usersRepository = require("../repositories/users-repository");
 class BasicAuthMiddleware {
-    constructor() {}
-  
-    async basicAuth(req, res, next) {
-      const { userName , pass } = req.body;
-  const userExist = await usersRepository.findUser(req.body);
-  console.log(userExist);
-  
-     /*  if (username == 'admin' && password == 'pass') {
-        return done(null, { userName, pass });
-        } else {
-        return done(null, false, { message: 'Incorrect username or password' });
-        } */
-   /*    
-     if (0 === 0) {
-         console.log(userName , pass);
-          next();
-      }else{
-          res.status(403).json({message: 'Login fail'});
-      }  */
+  constructor() {}
+
+  async verify(req, res, next) {
+
+    const { userName , pass } = req.body;
+    const user = await usersRepository.findUser(req.body); //{"role": 0, "_id": "5ea0926055cfa364a0723e5e","userName": "admin1", "pass": "1234"}
+    
+    if (user != null) {
+      next();
+    } else {
+        res.status(403).json(`Login fail with ==> userName: ${userName},  pass: ${pass}`);
+    }
   }
-  
-  }
-  
-  module.exports = new BasicAuthMiddleware();
+}
+
+module.exports = new BasicAuthMiddleware();
