@@ -1,11 +1,39 @@
-const express = require("express");
-const router = express.Router();
+const postRouter = require("express").Router();
 const PostController = require("../controllers/posts-controller");
+const User = require("../models/user");
+const passport = require("passport");
+const JWTstrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const SECRET_KEY = "secret_token"; //normally store this in process.env.secret
 
-router.get("/posts", PostController.getAllPosts);
-router.get("/posts/:id", PostController.getPostById);
-router.post("/posts", PostController.createPost);
-router.put("/posts/:id", PostController.modifyPost);
-router.delete("/posts/:id", PostController.deletePost);
+const jwtOpts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: SECRET_KEY,
+};
 
-module.exports = router;
+passport.use(
+  new JWTstrategy(jwtOpts, async (token, done) => {
+    try {
+      const user = await User.findOne({ userName: token.body.userName }).exec();
+      return done(null, user);
+    } catch (error) {
+      done("error en jwt middleware", error);
+    }
+  })
+);
+
+postRouter.use(passport.initialize());
+
+
+/* postRouter.get("/posts",PostController.getAllPosts); */
+postRouter.get(
+  "/posts",
+  passport.authenticate("jwt", { session: false }),
+  PostController.getAllPosts
+);
+postRouter.get("/posts/:id", PostController.getPostById);
+postRouter.post("/posts", PostController.createPost);
+postRouter.put("/posts/:id", PostController.modifyPost);
+postRouter.delete("/posts/:id", PostController.deletePost);
+
+module.exports = postRouter;

@@ -10,18 +10,29 @@
 			"name": "Posts",
 			"item": [
 				{
-					"name": "GET Posts (without comments)",
+					"name": "GET Posts (TOKEN required)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTE5ZGY4ODE1NGJlN2M3NmY0OTY2NCIsInVzZXJOYW1lIjoiYWRtaW4yIn0sImlhdCI6MTU4NzY1Njk5OX0.Lcr5lTOW3acFFrmRsscSvrUG7Mwyyjk-9Qazf8scDMQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/blog/posts",
+							"raw": "http://localhost:3001/api/blog/posts",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"posts"
 							]
@@ -35,16 +46,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/blog/posts/5e99924075002bef8fafa9c6",
+							"raw": "http://localhost:3001/api/blog/posts/5ea04fc605cfed478bccb080",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"posts",
-								"5e99924075002bef8fafa9c6"
+								"5ea04fc605cfed478bccb080"
 							]
 						},
 						"description": "GET One Post by Id (With comments) "
@@ -58,7 +70,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"postAuthorName\": \"zzzzzz\",\n\t\"postAuthorNickName\": \"My Nick\",\n    \"postTitle\": \"Título de nuevo post\",\n    \"postContent\": \"este es el contenido del post\"\n  }",
+							"raw": "{\n    \"postAuthorName\":\"Autor\",\n\t\"postAuthorNickName\": \"My Nick\",\n    \"postTitle\": \"Título de nuevo post\",\n    \"postContent\": \"este es el contenido del post\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -66,13 +78,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/blog/posts/",
+							"raw": "http://localhost:3001/api/blog/posts/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"posts",
 								""
@@ -88,7 +101,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"_id\" : \"5e971129d6a5eb81c5ac92e7\",\n    \"postBody\": \"bbbbbb\"\n  }",
+							"raw": "{\n    \"postBody\": \"2\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -96,16 +109,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/blog/posts/",
+							"raw": "http://localhost:3001/api/blog/posts/5ea081423bc4355bb2bc8013",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"posts",
-								""
+								"5ea081423bc4355bb2bc8013"
 							]
 						}
 					},
@@ -117,16 +131,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/blog/posts/5e97580365c8d59780696366",
+							"raw": "http://localhost:3001/api/blog/posts/5ea081423bc4355bb2bc8013",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"posts",
-								"5e97580365c8d59780696366"
+								"5ea081423bc4355bb2bc8013"
 							]
 						}
 					},
@@ -140,13 +155,34 @@
 			"name": "Comments",
 			"item": [
 				{
+					"name": "GET all comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/blog/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"blog",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "POST comment",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"commentAuthorName\": \"bbbbb\",\n    \"commentContent\": \"comentario\"\n}",
+							"raw": "{\n    \"commentAuthorName\": \"bbbbb\",\n    \"commentContent\": \"este comentario es un  comentario\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -154,16 +190,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/blog/comments/5e99924075002bef8fafa9c6",
+							"raw": "http://localhost:3001/api/blog/comments/5ea04fc605cfed478bccb080",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"comments",
-								"5e99924075002bef8fafa9c6"
+								"5ea04fc605cfed478bccb080"
 							]
 						}
 					},
@@ -175,16 +212,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/blog/comments/5e988c4478bb3ec759e2d292",
+							"raw": "http://localhost:3001/api/blog/comments/5ea081faba73845beae412c4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"comments",
-								"5e988c4478bb3ec759e2d292"
+								"5ea081faba73845beae412c4"
 							]
 						}
 					},
@@ -197,7 +235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"_id\" : \"5e9779519337c4a58e6a4475\",\n\t\"commentContent\":\"wef modificado\"\n}\n",
+							"raw": "{\n\t\"commentContent\":\" modificado\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -205,36 +243,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/blog/comments",
+							"raw": "http://localhost:3001/api/blog/comments/5e9eafd81306de17d5b97c2e",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
-								"blog",
-								"comments"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET all comments",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3001/blog/comments/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3001",
-							"path": [
+								"api",
 								"blog",
 								"comments",
-								""
+								"5e9eafd81306de17d5b97c2e"
 							]
 						}
 					},
@@ -253,13 +272,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/blog/offensivewords/",
+							"raw": "http://localhost:3001/api/blog/offensivewords/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"offensivewords",
 								""
@@ -283,13 +303,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/blog/offensivewords",
+							"raw": "http://localhost:3001/api/blog/offensivewords",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"offensivewords"
 							]
@@ -312,16 +333,17 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/blog/offensivewords/5e986365c3a25eb47b017b95",
+							"raw": "http://localhost:3001/api/blog/offensivewords/5e9da32666917c0dd7e7a120",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"offensivewords",
-								"5e986365c3a25eb47b017b95"
+								"5e9da32666917c0dd7e7a120"
 							]
 						}
 					},
@@ -333,16 +355,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/blog/offensivewords/5e9966ee756378e248767cff",
+							"raw": "http://localhost:3001/api/blog/offensivewords/5e9da32666917c0dd7e7a120",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3001",
 							"path": [
+								"api",
 								"blog",
 								"offensivewords",
-								"5e9966ee756378e248767cff"
+								"5e9da32666917c0dd7e7a120"
 							]
 						}
 					},
@@ -350,6 +373,134 @@
 				}
 			],
 			"description": "CRUD Methods for OffensiveWord",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role\": \"1\",\n    \"userName\": \"user2\",\n    \"pass\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/users/5ea07a9d53acab56c5ecf6eb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"users",
+								"5ea07a9d53acab56c5ecf6eb"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin2",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
