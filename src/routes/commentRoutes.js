@@ -1,12 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const MyCommentsController = require("../controllers/comments-controller");
+const commentsRouter = require("express").Router();
+const commentsController = require("../controllers/comments-controller");
 const OffensiveWordsMiddleware = require("../middlewares/offensivewords-middleware");
 
 
-router.get("/comments", MyCommentsController.getAllComments);
-router.post("/comments/:postId",OffensiveWordsMiddleware.OffensiveWordsChecker, MyCommentsController.createComment);
-router.put("/comments/:commentId", MyCommentsController.modifyComment);
-router.delete("/comments/:commentId", MyCommentsController.deleteComment);
+commentsRouter.get("/comments", commentsController.getAllComments);
+commentsRouter.post("/comments/:postId",OffensiveWordsMiddleware.OffensiveWordsChecker, commentsController.createComment);
+commentsRouter.put("/comments/:commentId", commentsController.modifyComment);
+commentsRouter.delete("/comments/:commentId", commentsController.deleteComment);
 
-module.exports = router;
+module.exports = commentsRouter;
