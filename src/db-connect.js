@@ -12,13 +12,18 @@ const connectToDb = async () => {
                 auth: { "authSource": "admin" },
                 user: "admin",
                 pass: "admin",
+                useCreateIndex: true,
                 useUnifiedTopology: true,
                 useNewUrlParser: true,
                 useFindAndModify: false
             });
             
-            await checkWordsOnLoad.checkWordsOnLoad();
-            await checkAdminsOnLoad.checkAdminsOnLoad();
+          const responseWordsOnLoad =  await checkWordsOnLoad.checkWordsOnLoad();
+          const responseAdminsOnLoad =   await checkAdminsOnLoad.checkAdminsOnLoad();
+          
+
+          console.log(`Server Up on port ${process.env._PORT}`," =====>",responseWordsOnLoad," =====>", responseAdminsOnLoad);
+          
 
     } catch (err) {
         console.log(err);

@@ -9,15 +9,17 @@ const app = express();
 //middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use("/api", require("./routes/index"));
 
-app.use("/blog", require("./routes/postRoutes")); //API Post
-app.use("/blog", require("./routes/commentRoutes")); //API Comments
-app.use("/blog", require("./routes/offensivewordRoutes")); //API Offensivewords */
-
+//Handle errors
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.json({ error : err });
+});
 
 (async function main() {
   await dbConnect();
-  app.listen(process.env._PORT, () => console.log(`Mongo & Server started in port ${process.env._PORT}`));
+  app.listen(process.env._PORT);
 })();
 
 module.exports = app;
