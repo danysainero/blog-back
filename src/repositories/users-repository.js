@@ -1,5 +1,5 @@
-const userSchema = require("../models/user");
-const initAdminsList = require("../../data/admins-list.json");
+const userSchema = require('../models/user');
+const initAdminsList = require('../../data/admins-list.json');
 
 class UserRepository {
   constructor() {}
@@ -31,7 +31,7 @@ class UserRepository {
       const createdUser = await userSchema(newUser).save();
       return createdUser;
     } catch (err) {
-      err.code === 11000 ? err.message = "El nombre de usuario ya existe" :  err.message;     
+      err.code === 11000 ? err.message = 'El nombre de usuario ya existe' :  err.message;     
       console.log(err.message);
       return err.message;
     }

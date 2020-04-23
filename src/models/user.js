@@ -55,4 +55,4 @@ UserSchema.methods.isValidPassword = async function(pass){
   return compare;
 }
 
-module.exports = mongoose.model("user", UserSchema, 'user');
+module.exports = mongoose.model('user', UserSchema, 'user');

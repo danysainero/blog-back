@@ -1,9 +1,9 @@
-import request from "supertest";
-import app from "../../src/app";
-import mongoose from "mongoose";
-import mockedPosts from "../test/mocks/posts";
+import request from 'supertest';
+import app from '../../src/app';
+import mongoose from 'mongoose';
+import mockedPosts from '../test/mocks/posts';
 
-describe("Posts CRUD", () => {
+describe('Posts CRUD', () => {
   let server;
   let newPostId;
   let mockedPost;
@@ -18,7 +18,7 @@ describe("Posts CRUD", () => {
     server.close();
   });
 
-  it("Posts CRUD", async () => {
+  it('Posts CRUD', async () => {
 
     /* POST ****************************************************** */
     const newPost = await server
@@ -31,7 +31,7 @@ describe("Posts CRUD", () => {
     expect(newPost.body.postContent).toBe(mockedPost.postContent);
 
     /* GET ****************************************************** */
-    await server.get("/blog/posts").expect(200);
+    await server.get('/blog/posts').expect(200);
 
     /* GET BY ID ****************************************************** */
     const post = await server.get(`/blog/posts/${newPostId}`).expect(200);
@@ -39,11 +39,11 @@ describe("Posts CRUD", () => {
 
     /* PUT ****************************************************** */
     const modifiedPost = { ...mockedPosts[0] };
-    modifiedPost.postContent = "TEXTO MODIFICADO";
+    modifiedPost.postContent = 'TEXTO MODIFICADO';
 
     const response = await server
       .put(`/blog/posts/${newPostId}`)
-      .set("Accept", "application/json")
+      .set('Accept', 'application/json')
       .send(modifiedPost)
       .expect(200);
 

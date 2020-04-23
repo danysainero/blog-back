@@ -1,4 +1,4 @@
-const PostService = require("../../src/services/posts-service");
+const PostService = require('../../src/services/posts-service');
 
 class PostsController {
   constructor() {}

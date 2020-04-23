@@ -1,4 +1,4 @@
-const OffensivewordsService = require("../services/offensivewords-service");
+const OffensivewordsService = require('../services/offensivewords-service');
 
 class OffensivewordsController {
   constructor() {}
