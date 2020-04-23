@@ -38,15 +38,19 @@ UserSchema.pre('save', async function(next){
   //Replace the plain text password with the hash and then store it
   this.pass = hash;
 
+  //Indicates we're done and moves on to the next middleware
   next();
 });
 
+
+
+
+//We'll use this later on to make sure that the user trying to log in has the correct credentials
 UserSchema.methods.isValidPassword = async function(pass){
   const user = this;
   //Hashes the password sent by the user for login and checks if the hashed password stored in the
   //database matches the one sent. Returns true if it does else false.
-  console.log(pass, user.pass);
-  
+ 
   const compare = await bcrypt.compare(pass, user.pass);
   return compare;
 }

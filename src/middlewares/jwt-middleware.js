@@ -10,14 +10,16 @@ const SECRET_KEY = "SECRET_KEY" //normally store this in process.env.secret
 class JwtMiddleware {
   constructor() {}
 
-  async verify(userName, pass, done) {
+ /*  async verify(userName, pass, done) {
     const user = await usersRepository.findUser(userName, pass);
     if (!user) {
       return done(null, false, { message: "User not found" });
     } else {
       return done(null, userName);
     }
-  }
+  } */
 }
 
 module.exports = new JwtMiddleware();
+
+
