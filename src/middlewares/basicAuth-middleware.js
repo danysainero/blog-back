@@ -1,4 +1,4 @@
-const usersRepository = require("../repositories/users-repository");
+const usersRepository = require('../repositories/users-repository');
 
 class BasicAuthMiddleware {
   constructor() {}
@@ -8,16 +8,16 @@ class BasicAuthMiddleware {
       const user = await usersRepository.findUser(userName);
 
       if (!user) {
-        return done(null, false, { message: "User not found" });
+        return done(null, false, { message: 'User not found' });
       }
 
       const validate = await user.isValidPassword(pass);
 
       if (!validate) {
-        return done(null, false, { message: "Wrong Password" });
+        return done(null, false, { message: 'Wrong Password' });
       }
 
-      return done(null, user, { message: "Logged in Successfully" });
+      return done(null, user, { message: 'Logged in Successfully' });
     } catch (err) {
       console.log(err);
     }

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const OffensiveWordSchema = new mongoose.Schema(
   {
@@ -18,4 +18,4 @@ const OffensiveWordSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("OffensiveWords", OffensiveWordSchema);
+module.exports = mongoose.model('OffensiveWords', OffensiveWordSchema);

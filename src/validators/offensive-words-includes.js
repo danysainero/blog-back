@@ -7,7 +7,7 @@ class OffensiveWordsIncludes {
       let notAllowedOffensiveWords = [];
 
       offensiveWordsList.forEach((word) => {
-        const isWordIncluded = new RegExp("\\b" + word.word + "\\b").test(
+        const isWordIncluded = new RegExp('\\b' + word.word + '\\b').test(
           comment.toLowerCase()
         );
         if (isWordIncluded) {

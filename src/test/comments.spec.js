@@ -1,6 +1,6 @@
-import request from "supertest";
-import app from "../../src/app";
-const mockedPosts = require("../test/mocks/comments.json");
+import request from 'supertest';
+import app from '../../src/app';
+const mockedPosts = require('../test/mocks/comments.json');
 
 
 

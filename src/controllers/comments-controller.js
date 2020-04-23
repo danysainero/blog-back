@@ -1,5 +1,5 @@
-const CommentsService = require("../services/comments-service");
-const OffensiveWordsIncludes = require("../validators/offensive-words-includes");
+const CommentsService = require('../services/comments-service');
+const OffensiveWordsIncludes = require('../validators/offensive-words-includes');
 
 class CommentsController {
   constructor() {}
