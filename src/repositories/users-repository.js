@@ -4,10 +4,10 @@ const initAdminsList = require("../../data/admins-list.json");
 class UserRepository {
   constructor() {}
 
-  async findUser(user) {
-    const { userName, pass } = user;
+  async findUser(userName) {
     try {
-      const user = userSchema.findOne({ userName: userName, pass: pass }, { __v: 0, createdAt: 0, updatedAt: 0 });   
+      const user = await userSchema.findOne({ userName: userName }, { __v: 0, createdAt: 0, updatedAt: 0});   
+     /*  const user = userSchema.findOne({ userName: userName, pass: pass }, { __v: 0, createdAt: 0, updatedAt: 0 });    */
       return user;
     } catch (err) {
       console.log(err.message);
@@ -26,7 +26,6 @@ class UserRepository {
     }
   }
 
-  //POST user by Id
   async createUser(newUser) {
     try {
       const createdUser = await userSchema(newUser).save();
@@ -38,7 +37,6 @@ class UserRepository {
     }
   }
 
-  //Delete user
   async deleteUser(userId) {
     try {
       const deletedUser = await userSchema.findByIdAndDelete(userId);
@@ -54,15 +52,6 @@ class UserRepository {
   async getAllAdmins() {
     try {
       return await userSchema.find({});
-    } catch (err) {
-      console.log(err.message);
-      return err.message;
-    }
-  }
-
-  async addAdminsOnLoad() {
-    try {
-      await userSchema.insertMany(initAdminsList);
     } catch (err) {
       console.log(err.message);
       return err.message;

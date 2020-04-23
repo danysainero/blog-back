@@ -38,20 +38,6 @@ class UsersController {
         next();
     }
   } 
-
-  async login(req, res , next) {
-    
-    const user = req.body
-    try{
-      const loginStatus = await userService.findUser(user);
-      res.json(loginStatus);
-      }catch(err) {
-        console.log(err);
-        res.status(500).send(err);
-    }finally {
-        next();
-    }
-  } 
 }
 
 module.exports = new UsersController();

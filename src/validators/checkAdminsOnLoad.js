@@ -1,5 +1,5 @@
 const UsersRepository = require("../repositories/users-repository");
-
+const AdminsList = require('../../data/admins-list.json')
 class checkAdminsOnLoad {
   constructor() {}
 
@@ -12,7 +12,8 @@ class checkAdminsOnLoad {
   }
 
   async addAdminsList() {
-    await UsersRepository.addAdminsOnLoad();
+    await UsersRepository.createUser(AdminsList[0]);
+    await UsersRepository.createUser(AdminsList[1]);
     return "Admins created on Load"
   }
 }

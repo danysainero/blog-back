@@ -1,18 +1,25 @@
-const passport = require("passport");
-const BasicStrategy = require("passport-http").BasicStrategy;
 const usersRepository = require("../repositories/users-repository");
+
 class BasicAuthMiddleware {
   constructor() {}
 
-  async verify(req, res, next) {
+  async verify(userName, pass, done) {
+    try {
+      const user = await usersRepository.findUser(userName);
 
-    const { userName , pass } = req.body;
-    const user = await usersRepository.findUser(req.body); //{"role": 0, "_id": "5ea0926055cfa364a0723e5e","userName": "admin1", "pass": "1234"}
-    
-    if (user != null) {
-      next();
-    } else {
-        res.status(403).json(`Login fail with ==> userName: ${userName},  pass: ${pass}`);
+      if (!user) {
+        return done(null, false, { message: "User not found" });
+      }
+
+      const validate = await user.isValidPassword(pass);
+
+      if (!validate) {
+        return done(null, false, { message: "Wrong Password" });
+      }
+
+      return done(null, user, { message: "Logged in Successfully" });
+    } catch (err) {
+      console.log(err);
     }
   }
 }
