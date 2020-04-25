@@ -1,5 +1,5 @@
 const owRouter = require('express').Router();
-const OwController = require('../controllers/offensivewords-controller');
+const OwController = require('../resources/offensiveWords/offensivewords-controller');
 
 owRouter.get('/offensivewords', OwController.getAllOffensivewords);
 owRouter.post('/offensivewords', OwController.createOffensiveword);

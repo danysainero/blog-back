@@ -1,35 +1,20 @@
 const postRouter = require('express').Router();
-const PostController = require('../controllers/posts-controller');
-const User = require('../models/user');
+const PostController = require('../resources/posts/posts-controller');
 const passport = require('passport');
 const JWTstrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-const SECRET_KEY = 'secret_token'; //normally store this in process.env.secret
+const jwtOpts = require('../middlewares/jwt-middleware').jwtOpts
+const verifyToken = require('../middlewares/jwt-middleware').verifyToken
 
-const jwtOpts = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: SECRET_KEY,
-};
 
-passport.use(
-  new JWTstrategy(jwtOpts, async (token, done) => {
-    try {
-      const user = await User.findOne({ userName: token.body.userName }).exec();
-      return done(null, user);
-    } catch (error) {
-      done('error en jwt middleware', error);
-    }
-  })
-);
+
+passport.use(new JWTstrategy(jwtOpts, (token, done) => verifyToken(token, done)));
 
 postRouter.use(passport.initialize());
 
-
-/* postRouter.get('/posts',PostController.getAllPosts); */
-postRouter.get('/posts',PostController.getAllPosts);
-postRouter.get('/posts/:id', PostController.getPostById);
-postRouter.post('/posts', passport.authenticate('jwt', { session: false }), PostController.createPost);
-postRouter.put('/posts/:id', passport.authenticate('jwt', { session: false }), PostController.modifyPost);
-postRouter.delete('/posts/:id', passport.authenticate('jwt', { session: false }), PostController.deletePost);
+postRouter.get('/posts', passport.authenticate('jwt', { session: false }), PostController.getAllPosts); //ALL
+postRouter.get('/posts/:id',PostController.getPostById);//ALL
+postRouter.post('/posts', PostController.createPost); //User.role = 1 (publisher) with TOKEN
+postRouter.put('/posts/:id', PostController.modifyPost);//User.role = 1 (publisher) with TOKEN only own post
+postRouter.delete('/posts/:id', PostController.deletePost);//User.role = 1 (publisher) with TOKEN only own post
 
 module.exports = postRouter;

@@ -43,8 +43,6 @@ UserSchema.pre('save', async function(next){
 });
 
 
-
-
 //We'll use this later on to make sure that the user trying to log in has the correct credentials
 UserSchema.methods.isValidPassword = async function(pass){
   const user = this;

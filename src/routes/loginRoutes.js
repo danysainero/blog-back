@@ -9,11 +9,8 @@ const SECRET_KEY = 'secret_token'; //normally store this in process.env.secret
 loginRouter.use(passport.initialize());
 passport.use(new BasicStrategy(authMiddleware.verify));
 
-loginRouter.post(
-  '/',
-  passport.authenticate('basic', { session: false }),
+loginRouter.post('/',passport.authenticate('basic', { session: false }),
   (req, res) => {
-
     const body = { _id: req.user._id, userName: req.user.userName };
     // const opts = { expiresIn: 120 }; token expires in 2min
     const token = jwt.sign({ body }, SECRET_KEY);

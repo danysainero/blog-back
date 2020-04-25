@@ -1,4 +1,4 @@
-const PostService = require('../../src/services/posts-service');
+const PostService = require('./posts-service');
 
 class PostsController {
   constructor() {}
@@ -28,9 +28,12 @@ class PostsController {
   }
 
   async createPost(req, res , next) {
+   
+    const newPost = req.body;
+    newPost.user = req.user.id;
     try{
-      const newPost = await PostService.createPost(req.body);
-      res.json(newPost);
+      const createdNewPost = await PostService.createPost(newPost);
+      res.json(createdNewPost);
       }catch(err) {
         console.log(err);
         res.status(500).send(err);
@@ -53,8 +56,11 @@ class PostsController {
   }
 
   async deletePost(req, res , next) {
+    const postID =req.params.id;
+    const userID = req.user.id;
+    console.log(userID)
     try{
-      const deletedPost = await PostService.deletePost(req.params.id);
+      const deletedPost = await PostService.deletePost(postID, userID);
       res.json(deletedPost);
       }catch(err) {
         console.log(err);

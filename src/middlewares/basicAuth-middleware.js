@@ -1,4 +1,4 @@
-const usersRepository = require('../repositories/users-repository');
+const usersRepository = require('../resources/users/users-repository');
 
 class BasicAuthMiddleware {
   constructor() {}

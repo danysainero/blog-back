@@ -1,5 +1,5 @@
-import offensiveWordsIncludes from './offensive-words-includes';
-import offensiveWordsList from '../../data/offensiveWords-list.json';
+import offensiveWordsIncludes from '../offensive-words-includes';
+import offensiveWordsList from '../../../data/offensiveWords-list.json';
 
 
 describe('validate if a comment has offensive words', ()=>{

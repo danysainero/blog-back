@@ -2,8 +2,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 const mongoURI = process.env._URL;
 const mongoose = require('mongoose');
-const checkWordsOnLoad = require('./validators/checkWordsOnLoad');
-const checkAdminsOnLoad = require('./validators/checkAdminsOnLoad');
+const checkWordsOnLoad = require('./validators/check-ow-onLoad');
+const checkAdminsOnLoad = require('./validators/check-admins-onLoad');
 
 const connectToDb = async () => {
     try {

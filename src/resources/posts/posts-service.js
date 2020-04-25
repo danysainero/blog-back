@@ -1,4 +1,4 @@
-const PostsRepository = require('../repositories/posts-repository');
+const PostsRepository = require('./posts-repository');
 
 class PostsService {
   constructor() {}
@@ -39,9 +39,10 @@ class PostsService {
     }
   }
 
-  async deletePost(id) {
+  async deletePost(postID, userID) {
+    
     try {
-      return await PostsRepository.deletePost(id);
+      return await PostsRepository.deletePost(postID, userID);
     } catch (err) {
       console.log(err.message);
       return err.message;

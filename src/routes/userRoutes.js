@@ -1,5 +1,5 @@
 const usersRouter = require('express').Router();
-const UsersController = require('../controllers/users-controller');
+const UsersController = require('../resources/users/users-controller');
 
 usersRouter.get('/', UsersController.getAllUsers);
 usersRouter.post('/', UsersController.createUser);

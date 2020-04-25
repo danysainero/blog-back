@@ -1,9 +1,10 @@
-const UsersRepository = require('../repositories/users-repository');
-const AdminsList = require('../../data/admins-list.json')
+const UsersRepository = require('../resources/users/users-repository');
+const AdminsList = require('../data/admins-list.json')
 class checkAdminsOnLoad {
   constructor() {}
 
   async checkAdminsOnLoad() {
+    
     const admins = await UsersRepository.getAllAdmins();
     
     return  Array.from(admins).length > 0

@@ -1,4 +1,4 @@
-const postSchema = require('../models/post');
+const postSchema = require('./posts-schema');
 
 class PostRepository {
   constructor() {}
@@ -6,8 +6,7 @@ class PostRepository {
   async getAllPosts() {
     try {
 
-      return await postSchema.find({}).populate('comments');
-      /*  return await postSchema.find({}, {comments:0}).populate('comments commentContent').exec(); */
+      return await postSchema.find({}).populate('comments').populate('user');
     } catch (err) {
       console.log(err.message);
       return err.message;
@@ -16,7 +15,7 @@ class PostRepository {
 
   async getPostById(postId) {
     try {
-      return await postSchema.findById(postId).populate('comments').exec();
+      return await postSchema.findById(postId).populate('comments').populate('user');
     } catch (err) {
       console.log(err.message);
       return err.message;
@@ -49,9 +48,9 @@ class PostRepository {
     }
   }
 
-  async deletePost(id) {
+  async deletePost(postID, userID) {
     try {
-      return await postSchema.findByIdAndDelete(id);
+      return await postSchema.findByIdAndDelete({ _id: postID, "user" : userID });
     } catch (err) {
       console.log(err.message);
       return err.message;

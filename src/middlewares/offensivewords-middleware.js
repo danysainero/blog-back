@@ -1,5 +1,5 @@
 const OffensiveWordsIncludes = require('../validators/offensive-words-includes');
-const OffensivewordsRepository = require('../repositories/offensivewords-repository');
+const OffensivewordsRepository = require('../resources/offensiveWords/offensiveWords-repository');
 
 class OffensiveWordsMiddleware {
   constructor() {}

@@ -1,4 +1,4 @@
-const OffensiveWordsRepository = require('../repositories/offensiveWords-repository');
+const OffensiveWordsRepository = require('../resources/offensiveWords/offensiveWords-repository');
 
 class checkWordsOnLoad {
   constructor() {}

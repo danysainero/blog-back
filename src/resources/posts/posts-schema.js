@@ -7,6 +7,10 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user: [{ 
+      type: Schema.Types.ObjectId,
+      ref: 'user'
+    }],
     postAuthorNickName: {
       type: String,
       required: true,

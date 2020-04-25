@@ -1,4 +1,4 @@
-const OffensivewordsRepository = require('../repositories/offensivewords-repository');
+const OffensivewordsRepository = require('./offensivewords-repository');
 
 class OffensivewordsService {
   constructor() {}

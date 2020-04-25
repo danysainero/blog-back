@@ -1,5 +1,5 @@
 const commentsRouter = require('express').Router();
-const commentsController = require('../controllers/comments-controller');
+const commentsController = require('../resources/comments/comments-controller');
 const OffensiveWordsMiddleware = require('../middlewares/offensivewords-middleware');
 
 

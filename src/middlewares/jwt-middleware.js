@@ -1,25 +1,24 @@
-const passport = require('passport');
-const BasicStrategy = require('passport-http').BasicStrategy;
-const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const jwt = require('jsonwebtoken');
+const userSchema = require('../resources/users/users-schema');
+const SECRET_KEY = 'secret_token'; //normally store this in process.env.secret
+const RoleChecker = require('../validators/check-role');
 
-const SECRET_KEY = 'SECRET_KEY' //normally store this in process.env.secret
+const jwtMiddleware = {}
 
+jwtMiddleware.jwtOpts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: SECRET_KEY,
+};
 
-class JwtMiddleware {
-  constructor() {}
+jwtMiddleware.verifyToken = async (token, done) =>{
+    try {
+      const user = await userSchema.findOne({ userName: token.body.userName }).exec();
+     await RoleChecker.roleVerify(user);
+      return done(null, user);
+    } catch (error) {
+      return done(error.message);
+    }  
+  }
 
- /*  async verify(userName, pass, done) {
-    const user = await usersRepository.findUser(userName, pass);
-    if (!user) {
-      return done(null, false, { message: 'User not found' });
-    } else {
-      return done(null, userName);
-    }
-  } */
-}
-
-module.exports = new JwtMiddleware();
-
+  module.exports = jwtMiddleware;
 
