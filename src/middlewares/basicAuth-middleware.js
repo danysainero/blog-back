@@ -19,7 +19,7 @@ class BasicAuthMiddleware {
 
       return done(null, user, { message: 'Logged in Successfully' });
     } catch (err) {
-      console.log(err);
+       
     }
   }
 }

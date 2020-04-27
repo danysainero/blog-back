@@ -4,14 +4,14 @@ import adminsList from '../../data/admins-list.json';
 
 describe('check user´s role', ()=>{
 
-it('should have admin role', async () => {
+it('should have admin role',  () => {
     
-const offensiveWordsChecker = await offensiveWordsIncludes.checkWordsOnComment(comment, offensiveWordsList);
+/* const offensiveWordsChecker = await offensiveWordsIncludes.checkWordsOnComment(comment, offensiveWordsList);
 
-    expect(offensiveWordsChecker.length).toBeGreaterThan(0);
+    expect(offensiveWordsChecker.length).toBeGreaterThan(0); */
 });
 
-/* it('shouldn´t have admin role', async () => {
+/* it('shouldn´t have admin role',  () => {
     const comment = 'Esto es un comentario';
     
     const offensiveWordsChecker = await offensiveWordsIncludes.checkWordsOnComment(comment, offensiveWordsList);

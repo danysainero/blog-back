@@ -3,37 +3,38 @@ const CommentsService = require('./comments-service');
 class CommentsController {
   constructor() {}
 
-  async getAllComments(req, res , next) {
-    const comments = await CommentsService.getAllComments();
-    res.json(comments);
-  }
-
-  async createComment(req, res , next) {
+  async createComment(req, res) {
+    const comment = req.body;
+    comment.user = req.user.id;
+    const postId = req.params.postId
+   
     try {
-      const newComment = await CommentsService.createComment(
-        req.params.postId,
-        req.body
-      );
-
+      const newComment = await CommentsService.createComment(postId, comment);
       res.json(newComment);
     } catch (err) {
-      console.log(err.message);
-      res.send(err.message);
+      res.status(500).send(err);
     }
   }
 
-  async modifyComment(req, res , next) {
-    const modifiedComment = await CommentsService.modifyComment(
-      req.params.commentId,
-      req.body
-    );
-    res.json(modifiedComment);
-  }
 
-  async deleteComment(req, res , next) {
-    const deletedComment = await CommentsService.deleteComment(
-      req.params.commentId
-    );
+  // async getAllComments(req, res) {
+  //   const comments = await CommentsService.getAllComments();
+  //   res.json(comments);
+  // }
+
+  
+  // async modifyComment(req, res) {
+  //   const modifiedComment = await CommentsService.modifyComment(
+  //     req.params.commentId,
+  //     req.body
+  //   );
+  //   res.json(modifiedComment);
+  // }
+
+  async deleteComment(req, res) {
+    const commentId = req.params.commentId;
+    const user = req.user;
+    const deletedComment = await CommentsService.deleteComment(commentId, user);
     res.json(deletedComment);
   }
 }

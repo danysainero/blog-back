@@ -11,10 +11,11 @@ passport.use(new JWTstrategy(jwtOpts, (token, done) => verifyToken(token, done))
 
 postRouter.use(passport.initialize());
 
-postRouter.get('/posts', passport.authenticate('jwt', { session: false }), PostController.getAllPosts); //ALL
+// middleware => passport.authenticate('jwt', { session: false }),
+postRouter.get('/posts',  PostController.getAllPosts); //ALL
 postRouter.get('/posts/:id',PostController.getPostById);//ALL
-postRouter.post('/posts', PostController.createPost); //User.role = 1 (publisher) with TOKEN
-postRouter.put('/posts/:id', PostController.modifyPost);//User.role = 1 (publisher) with TOKEN only own post
-postRouter.delete('/posts/:id', PostController.deletePost);//User.role = 1 (publisher) with TOKEN only own post
+postRouter.post('/posts', passport.authenticate('jwt', { session: false }), PostController.createPost); //User.role = 1 (publisher) with TOKEN
+postRouter.put('/posts/:id', passport.authenticate('jwt', { session: false }), PostController.modifyPost);//User.role = 1 (publisher) with TOKEN only own post
+postRouter.delete('/posts/:id', passport.authenticate('jwt', { session: false }), PostController.deletePost);//User.role = 1 (publisher) with TOKEN only own post
 
 module.exports = postRouter;
