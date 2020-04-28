@@ -4,7 +4,6 @@ const initAdminsList = require('../../data/admins-list.json');
 class UserRepository {
   constructor() {}
 
-
   async findUser(userName) {
     try {
       const user = await userSchema.findOne({ userName: userName }, { __v: 0, createdAt: 0, updatedAt: 0});   

@@ -8,7 +8,6 @@ class UsersController {
       const users = await userService.getAllUsers();
       res.status(200).send(users);
     }catch(err) {
-         
         res.status(500).send(err);
     }finally {
         next();
@@ -20,7 +19,6 @@ class UsersController {
       const newUser = await userService.createUser(req.body);
       res.json(newUser);
       }catch(err) {
-         
         res.status(500).send(err);
     }finally {
         next();
@@ -32,7 +30,6 @@ class UsersController {
       const deletedUser = await userService.deleteUser(req.params.id);
       res.json(deletedUser);
       }catch(err) {
-         
         res.status(500).send(err);
     }finally {
         next();

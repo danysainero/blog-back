@@ -2,12 +2,8 @@ class CheckRoleMiddleware {
   constructor() {}
 
   roleVerify(user) {
-    if (user.role === 0 ) {
-      return 'eres admin';
-    }
-    if (user.role === 1 ) {
-      return 'eres publisher';
-    }
+    let userRole = user.role === 0 ? 'eres admin' : 'eres publisher';
+    return userRole;
   }
 }
 

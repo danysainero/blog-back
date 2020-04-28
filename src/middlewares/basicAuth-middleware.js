@@ -4,6 +4,7 @@ class BasicAuthMiddleware {
   constructor() {}
 
   async verify(userName, pass, done) {
+    
     try {
       const user = await usersRepository.findUser(userName);
 

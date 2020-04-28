@@ -1,5 +1,5 @@
 const postSchema = require("./posts-schema");
-const commentsRepository = require('../comments/comments-repository');
+const commentsRepository = require("../comments/comments-repository");
 
 class PostRepository {
   constructor() {}
@@ -62,9 +62,14 @@ class PostRepository {
 
   async deletePost(postID, userID) {
     try {
-      const deletedPost = await postSchema.findByIdAndDelete({ _id: postID, user: userID });
+      const deletedPost = await postSchema.findByIdAndDelete({
+        _id: postID,
+        user: userID,
+      });
       if (deletedPost.comments.length > 0) {
-       const deletedComments = await commentsRepository.deleteMany(deletedPost.comments);   
+        const deletedComments = await commentsRepository.deleteMany(
+          deletedPost.comments
+        );
       }
       if (!deletedPost) {
         return "No existe Post con ese Id";

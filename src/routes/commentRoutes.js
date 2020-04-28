@@ -10,8 +10,8 @@ passport.use(new JWTstrategy(jwtOpts, (token, done) => verifyToken(token, done))
 
 commentsRouter.use(passport.initialize());
 
-commentsRouter.post('/comments/:postId',passport.authenticate('jwt', { session: false }), OffensiveWordsMiddleware.OffensiveWordsChecker, commentsController.createComment);
 commentsRouter.get('/comments', commentsController.getAllComments);
+commentsRouter.post('/comments/:postId',passport.authenticate('jwt', { session: false }), OffensiveWordsMiddleware.OffensiveWordsChecker, commentsController.createComment);
 commentsRouter.put('/comments/:commentId',passport.authenticate('jwt', { session: false }), commentsController.modifyComment);
 commentsRouter.delete('/comments/:commentId',passport.authenticate('jwt', { session: false }), commentsController.deleteComment);
 
