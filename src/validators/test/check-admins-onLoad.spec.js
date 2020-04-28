@@ -1,6 +1,11 @@
-describe('', ()=>{
+import AdminsList from '../../data/admins-list.json'
 
-it('should ', () => {
+describe('check admins on DB load', ()=>{
+
+it('should exist allready admins in DB', () => {
+
+    const admins = AdminsList;
+    
     
 });
 

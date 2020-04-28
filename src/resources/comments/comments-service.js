@@ -1,15 +1,14 @@
-const CommentsRepository = require('./comments-repository');
-const OffensiveWordsIncludes = require('../../validators/offensive-words-includes');
+const CommentsRepository = require("./comments-repository");
+const OffensiveWordsIncludes = require("../../validators/offensive-words-includes");
 
 class CommentsService {
   constructor() {}
 
   async getAllComments() {
     try {
-      const allComments =await CommentsRepository.getAllComments();
+      const allComments = await CommentsRepository.getAllComments();
       return allComments;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -18,25 +17,38 @@ class CommentsService {
     try {
       return await CommentsRepository.createComment(postId, newComment);
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
 
-  async modifyComment(commentId, comment) {
+  async modifyComment(commentId, comment, user) {
     try {
-      return await CommentsRepository.modifyComment(commentId, comment);
+      const commentToModify = await CommentsRepository.getPostById(commentId);
+      if (commentToModify.user) {
+        if (user.role === 0 || user._id.equals(commentToModify.user._id)) {
+          return await CommentsRepository.modifyComment(commentId, comment);
+        } else {
+          return "No tienes permiso";
+        }
+      }
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
 
-  async deleteComment(commentId) {
+  async deleteComment(commentId, user) {
     try {
-      return await CommentsRepository.deleteComment(commentId);
+      const commentToDelete = await CommentsRepository.getPostById(commentId);
+
+      if (commentToDelete.user) {
+        if (user.role === 0 || user._id.equals(commentToDelete.user._id)) {
+          const deletedPost = await CommentsRepository.deleteComment(commentId);
+          return deletedPost;
+        } else {
+          return "No tienes permiso";
+        }
+      }
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }

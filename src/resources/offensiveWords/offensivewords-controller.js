@@ -7,7 +7,7 @@ class OffensivewordsController {
     try{
     const offensivewords = await OffensivewordsService.getAllOffensivewords();
     res.json(offensivewords);}catch(err) {
-      console.log(err);
+       
       res.status(500).send(err);
   }finally {
       next();
@@ -20,7 +20,7 @@ class OffensivewordsController {
       req.body
     );
     res.json(newOffensiveword);}catch(err) {
-      console.log(err);
+       
       res.status(500).send(err);
   }finally {
       next();
@@ -34,7 +34,7 @@ class OffensivewordsController {
       req.body.word
     );
     res.json(modifiedOffensiveword);}catch(err) {
-      console.log(err);
+       
       res.status(500).send(err);
   }finally {
       next();
@@ -47,7 +47,7 @@ class OffensivewordsController {
       req.params.offensivewordId
     );
     res.json(deletedOffensiveword);}catch(err) {
-      console.log(err);
+       
       res.status(500).send(err);
   }finally {
       next();

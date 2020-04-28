@@ -7,7 +7,6 @@ class UsersService {
     try {
       return await UsersRepository.getAllUsers();
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -16,7 +15,6 @@ class UsersService {
     try {
       return await UsersRepository.createUser(newUser);
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -25,7 +23,6 @@ class UsersService {
     try {
       return await UsersRepository.deleteUser(userId);
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -34,7 +31,6 @@ class UsersService {
     try {
       return await UsersRepository.findUser(user);
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }

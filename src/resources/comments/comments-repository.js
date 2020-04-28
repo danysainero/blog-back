@@ -6,15 +6,22 @@ class CommentsRepository {
 
   async getAllComments() {
     try {
-     const allComments = await commentSchema.find({}).exec();
+     const allComments = await commentSchema.find({}).populate("user");
      if (!allComments.length) {
-      throw new Error(
-        `No existen comentarios`
-      );
-     }
+      return 'No existen comentarios'
+    }
       return allComments
+    } catch (err) { 
+      return err.message;
+    }
+  }
+
+  async getPostById(commentId){
+    try {
+      const comment = await commentSchema
+        .findById(commentId);
+      return comment;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -25,8 +32,7 @@ class CommentsRepository {
       await newComment.save();
       await postSchema.findByIdAndUpdate(postId, {$push: { comments: newComment }});
       return newComment;
-    } catch (err) {
-      console.log(err.message);
+    } catch (err) { 
       return err.message;
     }
   }
@@ -40,27 +46,23 @@ class CommentsRepository {
         }, {new: true}
       );
       if (!modifiedComment) {
-        throw new Error(
-          `El comentario con ese Id no existe`
-        );}
+        return `El comentario con ese Id no existe`
+      }
       return modifiedComment;
-    } catch (err) {
-      console.log(err.message);
+    } catch (err) { 
       return err.message
     }
   }
 
   async deleteComment(commentId) {
     try {
-      const deletedComment = await commentSchema.findByIdAndDelete(commentId);
+      const deletedComment = await commentSchema.findByIdAndDelete({_id: commentId});
+    
       if (!deletedComment) {
-        throw new Error(
-          `El comentario con ese Id no existe`
-        );
+        throw new Error("No existe Comentario con ese Id");
       }
       return deletedComment;
-    } catch (err) {
-      console.log(err.message);
+    } catch (err) { 
       return err.message;
     }
   }

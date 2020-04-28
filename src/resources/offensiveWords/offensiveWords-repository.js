@@ -6,9 +6,9 @@ class OffensivewordsRepository {
 
   async getAlloffensivewords() {
     try {
-      return await offensiveWordSchema.find({}).exec();
+      const allOW = await offensiveWordSchema.find({}).exec();
+      return allOW;
        } catch (err) {
-      console.log(err.message);
       return err.message
    }
   }
@@ -16,8 +16,7 @@ class OffensivewordsRepository {
   async createOffensiveword(newOffensiveword) {
     try {
       return await offensiveWordSchema(newOffensiveword).save();
-       } catch (err) {
-      console.log(err.message);
+       } catch (err) { 
       return err.message
    }
   }
@@ -30,7 +29,6 @@ class OffensivewordsRepository {
     );
     return modifiedOffensiveWord;
      } catch (err) {
-       console.log(err.message);
        return err.message
    }
   }
@@ -39,14 +37,11 @@ class OffensivewordsRepository {
     try {
       const deletedOffensiveword = await offensiveWordSchema.findByIdAndDelete( offensivewordId );
       if (!deletedOffensiveword) {
-        throw new Error(
-          `La palabra con ese Id no existe`
-        );
+        return `La palabra con ese Id no existe`
       }
       return deletedOffensiveword;
     
     } catch (err) {
-       console.log(err.message);
        return err.message
    }
   }
@@ -55,7 +50,6 @@ class OffensivewordsRepository {
     try {
      await offensiveWordSchema.insertMany(initOffensiveWordsList);
    } catch (err) {
-    console.log(err.message);
     return err.message
    }
   } 

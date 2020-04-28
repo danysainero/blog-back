@@ -3,70 +3,60 @@ const PostService = require('./posts-service');
 class PostsController {
   constructor() {}
 
-  async getAllPosts(req, res , next) {
+  async getAllPosts(req, res) {
     try{
       const posts = await PostService.getAllPosts();
       res.status(200).send(posts);
     }catch(err) {
-        console.log(err);
         res.status(500).send(err);
-    }finally {
-        next();
     }
   }
 
-  async getPostById(req, res , next) {
+  async getPostById(req, res) {
     try{
       const post = await PostService.getPostById(req.params.id);
       res.json(post);
-      }catch(err) {
-        console.log(err);
+      }catch(err) {      
         res.status(500).send(err);
-    }finally {
-        next();
     }
   }
 
-  async createPost(req, res , next) {
-   
+  async createPost(req, res) {
     const newPost = req.body;
+    
     newPost.user = req.user.id;
+
     try{
       const createdNewPost = await PostService.createPost(newPost);
       res.json(createdNewPost);
       }catch(err) {
-        console.log(err);
+         
         res.status(500).send(err);
-    }finally {
-        next();
     }
   }
 
-  async modifyPost(req, res , next) {
+  async modifyPost(req, res) {
+    const postID =req.params.id;
+    const post = req.body;
+    const user = req.user;
     try{
-
-      const modifiedPost = await PostService.modifyPost(req.params.id, req.body);
+      const modifiedPost = await PostService.modifyPost(postID, post, user);
       res.json(modifiedPost);
       }catch(err) {
-        console.log(err);
         res.status(500).send(err);
-    }finally {
-        next();
     }
   }
 
-  async deletePost(req, res , next) {
+  async deletePost(req, res) {
     const postID =req.params.id;
-    const userID = req.user.id;
-    console.log(userID)
+    const user = req.user;
+    
     try{
-      const deletedPost = await PostService.deletePost(postID, userID);
+      const deletedPost = await PostService.deletePost(postID, user);
       res.json(deletedPost);
       }catch(err) {
-        console.log(err);
+
         res.status(500).send(err);
-    }finally {
-        next();
     }
   }
 }

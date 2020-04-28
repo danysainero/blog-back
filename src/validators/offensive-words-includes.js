@@ -2,7 +2,7 @@
 class OffensiveWordsIncludes {
   constructor() {}
 
-  async checkWordsOnComment(comment, offensiveWordsList) {
+  checkWordsOnComment(comment, offensiveWordsList) {
     try {
       let notAllowedOffensiveWords = [];
 
@@ -16,7 +16,6 @@ class OffensiveWordsIncludes {
       });
       return notAllowedOffensiveWords;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }

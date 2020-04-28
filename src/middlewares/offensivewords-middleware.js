@@ -5,6 +5,8 @@ class OffensiveWordsMiddleware {
   constructor() {}
 
   async OffensiveWordsChecker(req, res, next) {
+     
+      
     const comment = req.body;
 
     const offensivewordsDB = await OffensivewordsRepository.getAlloffensivewords();
