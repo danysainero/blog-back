@@ -4,23 +4,20 @@ const initAdminsList = require('../../data/admins-list.json');
 class UserRepository {
   constructor() {}
 
-
   async findUser(userName) {
     try {
       const user = await userSchema.findOne({ userName: userName }, { __v: 0, createdAt: 0, updatedAt: 0});   
       return user;
-    } catch (err) {
-      console.log(err.message);
+    } catch (err) { 
       return err.message;
     }
   }
  
   async getAllUsers() {
     try {
-      const users = userSchema.find({}, { __v: 0, createdAt: 0, updatedAt: 0 });
+      const users = await userSchema.find({}, { __v: 0, createdAt: 0, updatedAt: 0 });
       return users;
-    } catch (err) {
-      console.log(err.message);
+    } catch (err) { 
       return err.message;
     }
   }
@@ -30,8 +27,7 @@ class UserRepository {
       const createdUser = await userSchema(newUser).save();
       return createdUser;
     } catch (err) {
-      err.code === 11000 ? err.message = 'El nombre de usuario ya existe' :  err.message;     
-      console.log(err.message);
+      err.code === 11000 ? err.message = 'El nombre de usuario ya existe' :  err.message;      
       return err.message;
     }
   }
@@ -40,8 +36,7 @@ class UserRepository {
     try {
       const deletedUser = await userSchema.findByIdAndDelete(userId);
       return deletedUser;
-    } catch (err) {
-      console.log(err.message);
+    } catch (err) { 
       return err.message;
     }
   }
@@ -49,8 +44,7 @@ class UserRepository {
   async getAllAdmins() {
     try {
       return await userSchema.find({});
-    } catch (err) {
-      console.log(err.message);
+    } catch (err) { 
       return err.message;
     }
   }

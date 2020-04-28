@@ -1,4 +1,4 @@
-const PostsRepository = require('./posts-repository');
+const PostsRepository = require("./posts-repository");
 
 class PostsService {
   constructor() {}
@@ -7,7 +7,6 @@ class PostsService {
     try {
       return await PostsRepository.getAllPosts();
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -16,7 +15,6 @@ class PostsService {
     try {
       return await PostsRepository.getPostById(postId);
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -25,26 +23,37 @@ class PostsService {
     try {
       return await PostsRepository.createPost(newPost);
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
 
-  async modifyPost(postId, modifiedPost) {
+  async modifyPost(postID, post, user) {
     try {
-      return await PostsRepository.modifyPost(postId, modifiedPost);
+      const postToModify = await PostsRepository.getPostById(postID);
+
+      if (user.role === 0 || user._id.equals(postToModify.user._id)) {
+        const modifiedPost = await PostsRepository.modifyPost(postID, post);
+        return modifiedPost;
+      } else {
+        return "No puedes modificar Post de otras personas";
+      }
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
 
-  async deletePost(postID, userID) {
-    
+  async deletePost(postID, user) {
     try {
-      return await PostsRepository.deletePost(postID, userID);
+
+      const postToDelete = await PostsRepository.getPostById(postID);
+
+      if (user.role === 0 || user._id.equals(postToDelete.user._id)) {
+        const deletedPost = await PostsRepository.deletePost(postID, postToDelete.user._id);
+        return deletedPost;
+      } else {
+        return "No puedes modificar Post de otras personas";
+      }
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }

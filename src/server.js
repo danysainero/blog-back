@@ -1,20 +1,15 @@
 const express = require('express');
+const errorHandler = require('./middlewares/errorHandler-midleware');
 const bodyParser = require('body-parser');
-const morgan = require('morgan')
-const dotenv = require('dotenv').config();
+const dotenv = require('dotenv');
 const dbConnect = require('./db-connect');
-
+dotenv.config();
 const app = express();
 
-app.use(morgan(':method  :status :url'));
+//middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(errorHandler);
 app.use('/api', require('./routes/index'));
-
-
-(async function main() {
-  await dbConnect();
-  app.listen(process.env._PORT);
-})();
 
 module.exports = app;

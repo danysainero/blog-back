@@ -1,10 +1,9 @@
 class CheckRoleMiddleware {
   constructor() {}
 
-  async roleVerify(user) {
-    if (user.role !== 0) {
-      throw new Error(`No es Admin`);
-    } 
+  roleVerify(user) {
+    let userRole = user.role === 0 ? 'eres admin' : 'eres publisher';
+    return userRole;
   }
 }
 

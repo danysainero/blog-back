@@ -1,23 +1,35 @@
-const postSchema = require('./posts-schema');
+const postSchema = require("./posts-schema");
+const commentsRepository = require("../comments/comments-repository");
 
 class PostRepository {
   constructor() {}
 
   async getAllPosts() {
     try {
-
-      return await postSchema.find({}).populate('comments').populate('user');
+      const allPost = await postSchema
+        .find({})
+        .populate("comments")
+        .populate("user");
+      if (!allPost.length) {
+        return "No existen Posts";
+      }
+      return allPost;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
 
   async getPostById(postId) {
     try {
-      return await postSchema.findById(postId).populate('comments').populate('user');
+      const post = await postSchema
+        .findById(postId)
+        .populate("comments")
+        .populate("user");
+      if (!post) {
+        return "No existe Post con ese Id";
+      }
+      return post;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -26,33 +38,44 @@ class PostRepository {
     try {
       return await postSchema(newPost).save();
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
 
-  async modifyPost(postId, post) {
-  
+  async modifyPost(postID, post) {
     try {
       const modifiedPost = await postSchema.findByIdAndUpdate(
-        postId,
+        { _id: postID },
         {
           $set: { postContent: post.postContent },
         },
         { new: true }
       );
+      if (!modifiedPost) {
+        return "No existe Post con ese Id";
+      }
       return modifiedPost;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
 
   async deletePost(postID, userID) {
     try {
-      return await postSchema.findByIdAndDelete({ _id: postID, "user" : userID });
+      const deletedPost = await postSchema.findByIdAndDelete({
+        _id: postID,
+        user: userID,
+      });
+      if (deletedPost.comments.length > 0) {
+        const deletedComments = await commentsRepository.deleteMany(
+          deletedPost.comments
+        );
+      }
+      if (!deletedPost) {
+        return "No existe Post con ese Id";
+      }
+      return deletedPost;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }

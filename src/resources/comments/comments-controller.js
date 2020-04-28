@@ -1,40 +1,58 @@
-const CommentsService = require('./comments-service');
+const CommentsService = require("./comments-service");
 
 class CommentsController {
   constructor() {}
 
-  async getAllComments(req, res , next) {
-    const comments = await CommentsService.getAllComments();
-    res.json(comments);
-  }
+  async createComment(req, res) {
+    const comment = req.body;
+    comment.user = req.user.id;
+    const postId = req.params.postId;
 
-  async createComment(req, res , next) {
     try {
-      const newComment = await CommentsService.createComment(
-        req.params.postId,
-        req.body
-      );
-
+      const newComment = await CommentsService.createComment(postId, comment);
       res.json(newComment);
     } catch (err) {
-      console.log(err.message);
-      res.send(err.message);
+      res.status(500).send(err);
     }
   }
 
-  async modifyComment(req, res , next) {
-    const modifiedComment = await CommentsService.modifyComment(
-      req.params.commentId,
-      req.body
-    );
-    res.json(modifiedComment);
+  async getAllComments(req, res) {
+    try {
+      const comments = await CommentsService.getAllComments();
+      res.json(comments);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   }
 
-  async deleteComment(req, res , next) {
-    const deletedComment = await CommentsService.deleteComment(
-      req.params.commentId
-    );
-    res.json(deletedComment);
+  async modifyComment(req, res) {
+    try {
+      const commentId = req.params.commentId;
+      const user = req.user;
+      const comment = req.body;
+      const modifiedComment = await CommentsService.modifyComment(
+        commentId,
+        comment,
+        user
+      );
+      res.json(modifiedComment);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  async deleteComment(req, res) {
+    try {
+      const commentId = req.params.commentId;
+      const user = req.user;
+      const deletedComment = await CommentsService.deleteComment(
+        commentId,
+        user
+      );
+      res.json(deletedComment);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   }
 }
 

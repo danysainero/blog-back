@@ -1,20 +1,34 @@
-const commentSchema = require('./comments-schema');
-const postSchema = require('../posts/posts-schema');
+const commentSchema = require("./comments-schema");
+const postSchema = require("../posts/posts-schema");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 
 class CommentsRepository {
   constructor() {}
 
+  async deleteMany(idsArray) {
+    return await commentSchema.deleteMany({
+      _id: { $in: idsArray.map(mongoose.Types.ObjectId) },
+    });
+  }
+
   async getAllComments() {
     try {
-     const allComments = await commentSchema.find({}).exec();
-     if (!allComments.length) {
-      throw new Error(
-        `No existen comentarios`
-      );
-     }
-      return allComments
+      const allComments = await commentSchema.find({}).populate("user");
+      if (!allComments.length) {
+        return "No existen comentarios";
+      }
+      return allComments;
     } catch (err) {
-      console.log(err.message);
+      return err.message;
+    }
+  }
+
+  async getPostById(commentId) {
+    try {
+      const comment = await commentSchema.findById(commentId);
+      return comment;
+    } catch (err) {
       return err.message;
     }
   }
@@ -23,10 +37,11 @@ class CommentsRepository {
     try {
       const newComment = new commentSchema(comment);
       await newComment.save();
-      await postSchema.findByIdAndUpdate(postId, {$push: { comments: newComment }});
+      await postSchema.findByIdAndUpdate(postId, {
+        $push: { comments: newComment },
+      });
       return newComment;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -37,33 +52,34 @@ class CommentsRepository {
         commentId,
         {
           $set: { commentContent: comment.commentContent },
-        }, {new: true}
+        },
+        { new: true }
       );
       if (!modifiedComment) {
-        throw new Error(
-          `El comentario con ese Id no existe`
-        );}
+        return `El comentario con ese Id no existe`;
+      }
       return modifiedComment;
     } catch (err) {
-      console.log(err.message);
-      return err.message
+      return err.message;
     }
   }
 
   async deleteComment(commentId) {
     try {
-      const deletedComment = await commentSchema.findByIdAndDelete(commentId);
+      const deletedComment = await commentSchema.findByIdAndDelete({
+        _id: commentId,
+      });
+
       if (!deletedComment) {
-        throw new Error(
-          `El comentario con ese Id no existe`
-        );
+        throw new Error("No existe Comentario con ese Id");
       }
       return deletedComment;
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
+
+  
 }
 
 module.exports = new CommentsRepository();

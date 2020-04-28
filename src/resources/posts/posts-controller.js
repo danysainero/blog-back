@@ -1,72 +1,60 @@
-const PostService = require('./posts-service');
+const PostService = require("./posts-service");
 
 class PostsController {
   constructor() {}
 
-  async getAllPosts(req, res , next) {
-    try{
+  async getAllPosts(req, res) {
+    try {
       const posts = await PostService.getAllPosts();
       res.status(200).send(posts);
-    }catch(err) {
-        console.log(err);
-        res.status(500).send(err);
-    }finally {
-        next();
+    } catch (err) {
+      res.status(500).send(err);
     }
   }
 
-  async getPostById(req, res , next) {
-    try{
+  async getPostById(req, res) {
+    try {
       const post = await PostService.getPostById(req.params.id);
       res.json(post);
-      }catch(err) {
-        console.log(err);
-        res.status(500).send(err);
-    }finally {
-        next();
+    } catch (err) {
+      res.status(500).send(err);
     }
   }
 
-  async createPost(req, res , next) {
-   
+  async createPost(req, res) {
     const newPost = req.body;
     newPost.user = req.user.id;
-    try{
+
+    try {
       const createdNewPost = await PostService.createPost(newPost);
       res.json(createdNewPost);
-      }catch(err) {
-        console.log(err);
-        res.status(500).send(err);
-    }finally {
-        next();
+    } catch (err) {
+      res.status(500).send(err);
     }
   }
 
-  async modifyPost(req, res , next) {
-    try{
-
-      const modifiedPost = await PostService.modifyPost(req.params.id, req.body);
+  async modifyPost(req, res) {
+    const postID = req.params.id;
+    const post = req.body;
+    const user = req.user;
+    
+    try {
+      const modifiedPost = await PostService.modifyPost(postID, post, user);
       res.json(modifiedPost);
-      }catch(err) {
-        console.log(err);
-        res.status(500).send(err);
-    }finally {
-        next();
+    } catch (err) {
+      res.status(500).send(err);
     }
   }
 
-  async deletePost(req, res , next) {
-    const postID =req.params.id;
-    const userID = req.user.id;
-    console.log(userID)
-    try{
-      const deletedPost = await PostService.deletePost(postID, userID);
+  async deletePost(req, res) {
+    const postID = req.params.id;
+    const user = req.user;
+
+    try {
+      const deletedPost = await PostService.deletePost(postID, user);
       res.json(deletedPost);
-      }catch(err) {
-        console.log(err);
-        res.status(500).send(err);
-    }finally {
-        next();
+    } catch (err) {
+      res.status(500).send(err);
     }
   }
 }

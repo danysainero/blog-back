@@ -10,14 +10,14 @@
 			"name": "Posts",
 			"item": [
 				{
-					"name": "GET Posts (TOKEN required)",
+					"name": "GET Posts",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTE5ZGY4ODE1NGJlN2M3NmY0OTY2NCIsInVzZXJOYW1lIjoiYWRtaW4yIn0sImlhdCI6MTU4NzY1Njk5OX0.Lcr5lTOW3acFFrmRsscSvrUG7Mwyyjk-9Qazf8scDMQ",
+									"value": "",
 									"type": "string"
 								}
 							]
@@ -41,12 +41,12 @@
 					"response": []
 				},
 				{
-					"name": "GET One Post by Id (With comments) ",
+					"name": "GET Post by Id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/api/blog/posts/5ea04fc605cfed478bccb080",
+							"raw": "http://localhost:3001/api/blog/posts/5ea53f961556b920b50984aa",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -56,7 +56,7 @@
 								"api",
 								"blog",
 								"posts",
-								"5ea04fc605cfed478bccb080"
+								"5ea53f961556b920b50984aa"
 							]
 						},
 						"description": "GET One Post by Id (With comments) "
@@ -64,13 +64,23 @@
 					"response": []
 				},
 				{
-					"name": "POST a new post (without comments)",
+					"name": "POST post",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTUzYjdhYjI3ZDNjMWU5NDIzYjRlNyIsInVzZXJOYW1lIjoiYWRtaW4yIn0sImlhdCI6MTU4ODA4MjE3MX0._K0O8wAFW5iFVD0zTQSIqsKlUIoYj22SUeVzhMz0kXU",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"postAuthorName\":\"Autor\",\n\t\"postAuthorNickName\": \"My Nick\",\n    \"postTitle\": \"Título de nuevo post\",\n    \"postContent\": \"este es el contenido del post\"\n  }",
+							"raw": "{\n\t\"userId\": \"895y395783987598798\",\n    \"postAuthorName\":\"author\",\n\t\"postAuthorNickName\": \"My Nick\",\n    \"postTitle\": \"Post de publisher\",\n    \"postContent\": \"este es el contenido del post\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -95,13 +105,23 @@
 					"response": []
 				},
 				{
-					"name": "PUT post but not the comments",
+					"name": "PUT post",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTUzYjdhYjI3ZDNjMWU5NDIzYjRlNyIsInVzZXJOYW1lIjoiYWRtaW4yIn0sImlhdCI6MTU4Nzk4MjQ2N30.-OEh8HEkyjZ9-PcZtvvKmrOMQl-bo6Gll52CWNvPpoY",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"postBody\": \"2\"\n  }",
+							"raw": "{\n    \"postContent\": \"modificacion user1\"\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,7 +129,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/blog/posts/5ea081423bc4355bb2bc8013",
+							"raw": "http://localhost:3001/api/blog/posts/5ea5423d4f6c02220a8dba55",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -119,19 +139,29 @@
 								"api",
 								"blog",
 								"posts",
-								"5ea081423bc4355bb2bc8013"
+								"5ea5423d4f6c02220a8dba55"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE post (with comments)",
+					"name": "DELETE post",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTUzYjdhYjI3ZDNjMWU5NDIzYjRlNyIsInVzZXJOYW1lIjoiYWRtaW4yIn0sImlhdCI6MTU4ODA3NDk3OX0.ukYWyOEnGwUm0Sqkf6eY1WG_AvF5971tTCrry4dQvpQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/api/blog/posts/5ea081423bc4355bb2bc8013",
+							"raw": "http://localhost:3001/api/blog/posts/5ea836d44767624e0c17b88f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -141,7 +171,7 @@
 								"api",
 								"blog",
 								"posts",
-								"5ea081423bc4355bb2bc8013"
+								"5ea836d44767624e0c17b88f"
 							]
 						}
 					},
@@ -178,11 +208,21 @@
 				{
 					"name": "POST comment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTUzYjdhYjI3ZDNjMWU5NDIzYjRlNyIsInVzZXJOYW1lIjoiYWRtaW4yIn0sImlhdCI6MTU4ODA3NDk3OX0.ukYWyOEnGwUm0Sqkf6eY1WG_AvF5971tTCrry4dQvpQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"commentAuthorName\": \"bbbbb\",\n    \"commentContent\": \"este comentario es un  comentario\"\n}",
+							"raw": "{\n    \"commentAuthorName\": \"bbbbb\",\n    \"commentContent\": \"comentario\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,7 +230,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/blog/comments/5ea04fc605cfed478bccb080",
+							"raw": "http://localhost:3001/api/blog/comments/5ea822a56687724c505673b9",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -200,7 +240,7 @@
 								"api",
 								"blog",
 								"comments",
-								"5ea04fc605cfed478bccb080"
+								"5ea822a56687724c505673b9"
 							]
 						}
 					},
@@ -209,10 +249,20 @@
 				{
 					"name": "DELETE comment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTUzYjdhYjI3ZDNjMWU5NDIzYjRlNyIsInVzZXJOYW1lIjoiYWRtaW4yIn0sImlhdCI6MTU4ODA2MzQ5MH0.rz5n1CF0AUf4NGwZ8kcUzGtLcraQes5lwhdvx0b3woY",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/api/blog/comments/5ea081faba73845beae412c4",
+							"raw": "http://localhost:3001/api/blog/comments/5ea7ed1a9871084016d502e4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -222,7 +272,7 @@
 								"api",
 								"blog",
 								"comments",
-								"5ea081faba73845beae412c4"
+								"5ea7ed1a9871084016d502e4"
 							]
 						}
 					},
@@ -231,11 +281,21 @@
 				{
 					"name": "PUT comment",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJib2R5Ijp7Il9pZCI6IjVlYTU0MDAxMTU1NmI5MjBiNTA5ODRhYyIsInVzZXJOYW1lIjoidXNlcjEifSwiaWF0IjoxNTg4MDY2ODY1fQ.trpQqfy0VrzRuGeOnuPFFJSGf7wky2vJeCBOgCYf20w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"commentContent\":\" modificado\"\n}\n",
+							"raw": "{\n\t\"commentContent\":\" modificado por user1\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -243,7 +303,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3001/api/blog/comments/5e9eafd81306de17d5b97c2e",
+							"raw": "http://localhost:3001/api/blog/comments/5ea7ed1b9871084016d502e5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -253,7 +313,7 @@
 								"api",
 								"blog",
 								"comments",
-								"5e9eafd81306de17d5b97c2e"
+								"5ea7ed1b9871084016d502e5"
 							]
 						}
 					},
@@ -435,7 +495,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/api/users/5ea07a9d53acab56c5ecf6eb",
+							"raw": "http://localhost:3001/api/users/5ea7fbdb0ab6d443371c3a22",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -444,7 +504,7 @@
 							"path": [
 								"api",
 								"users",
-								"5ea07a9d53acab56c5ecf6eb"
+								"5ea7fbdb0ab6d443371c3a22"
 							]
 						}
 					},

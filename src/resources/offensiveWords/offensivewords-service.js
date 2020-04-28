@@ -7,7 +7,6 @@ class OffensivewordsService {
     try {
       return await OffensivewordsRepository.getAlloffensivewords();
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -19,7 +18,6 @@ class OffensivewordsService {
         newOffensiveword
       );
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -31,7 +29,6 @@ class OffensivewordsService {
         offensiveword
       );
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
@@ -42,7 +39,6 @@ class OffensivewordsService {
         offensivewordId
       );
     } catch (err) {
-      console.log(err.message);
       return err.message;
     }
   }
