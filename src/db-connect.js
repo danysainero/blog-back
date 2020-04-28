@@ -21,7 +21,6 @@ const connectToDb = async () => {
           const responseAdminsOnLoad =   await checkAdminsOnLoad.checkAdminsOnLoad();
           
           console.log(`Server Up on port ${process.env._PORT}`,' =====>',responseWordsOnLoad,' =====>', responseAdminsOnLoad);
-    
 }
 
 module.exports = connectToDb;
