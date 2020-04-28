@@ -1,5 +1,7 @@
 const commentSchema = require('./comments-schema');
 const postSchema = require('../posts/posts-schema');
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId;
 
 class CommentsRepository {
   constructor() {}
@@ -65,6 +67,10 @@ class CommentsRepository {
     } catch (err) { 
       return err.message;
     }
+  }
+
+  async deleteMany(idsArray){
+   return await commentSchema.deleteMany({_id: {$in: idsArray.map(mongoose.Types.ObjectId)}});
   }
 }
 

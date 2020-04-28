@@ -2,8 +2,11 @@ class CheckRoleMiddleware {
   constructor() {}
 
   roleVerify(user) {
-    if (user.role !== 0 && user.role !== 1) {
-      throw new Error(`Unauthorize`);
+    if (user.role === 0 ) {
+      return 'eres admin';
+    }
+    if (user.role === 1 ) {
+      return 'eres publisher';
     }
   }
 }
