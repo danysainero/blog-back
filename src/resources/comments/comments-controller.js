@@ -17,19 +17,19 @@ class CommentsController {
   }
 
 
-  // async getAllComments(req, res) {
-  //   const comments = await CommentsService.getAllComments();
-  //   res.json(comments);
-  // }
+  async getAllComments(req, res) {
+    const comments = await CommentsService.getAllComments();
+    res.json(comments);
+  }
 
   
-  // async modifyComment(req, res) {
-  //   const modifiedComment = await CommentsService.modifyComment(
-  //     req.params.commentId,
-  //     req.body
-  //   );
-  //   res.json(modifiedComment);
-  // }
+  async modifyComment(req, res) {
+    const commentId = req.params.commentId;
+    const user = req.user;
+    const comment =  req.body;
+    const modifiedComment = await CommentsService.modifyComment(commentId,comment,user);
+    res.json(modifiedComment);
+  }
 
   async deleteComment(req, res) {
     const commentId = req.params.commentId;

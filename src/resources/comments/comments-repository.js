@@ -6,7 +6,7 @@ class CommentsRepository {
 
   async getAllComments() {
     try {
-     const allComments = await commentSchema.find({}).populate("user").exec();
+     const allComments = await commentSchema.find({}).populate("user");
      if (!allComments.length) {
       return 'No existen comentarios'
     }
@@ -20,11 +20,6 @@ class CommentsRepository {
     try {
       const comment = await commentSchema
         .findById(commentId);
-        console.log(comment);
-        
-        if (!comment) {
-          throw new Error("No existe Comentario con ese Id");
-        } 
       return comment;
     } catch (err) {
       return err.message;
@@ -62,6 +57,7 @@ class CommentsRepository {
   async deleteComment(commentId) {
     try {
       const deletedComment = await commentSchema.findByIdAndDelete({_id: commentId});
+    
       if (!deletedComment) {
         throw new Error("No existe Comentario con ese Id");
       }
