@@ -11,7 +11,7 @@ class checkAdminsOnLoad {
       ? 'Admins exist'
       : this.addAdminsList();
   }
-
+//sacar de aqui
   async addAdminsList() {
     await UsersRepository.createUser(AdminsList[0]);
     await UsersRepository.createUser(AdminsList[1]);

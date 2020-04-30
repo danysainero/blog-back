@@ -1,12 +1,8 @@
 const loginRouter = require("express").Router();
-const authMiddleware = require("../middlewares/basicAuth-middleware");
 const passport = require("passport");
-const BasicStrategy = require("passport-http").BasicStrategy;
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "secret_token"; //normally store this in process.env.secret
 
-loginRouter.use(passport.initialize());
-passport.use(new BasicStrategy(authMiddleware.verify));
 
 loginRouter.post(
   "/",
