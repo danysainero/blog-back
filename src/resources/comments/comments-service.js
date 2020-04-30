@@ -13,6 +13,14 @@ class CommentsService {
     }
   }
 
+/* const unauthorizedError = new Error('Este post no es tuyo');
+                unauthorizedError.code = 401;
+                throw unauthorizedError;
+} catch (err) {
+        res.status(err.code).send(err);
+        next(err);
+} */
+
   async createComment(postId, newComment) {
     try {
       return await CommentsRepository.createComment(postId, newComment);
@@ -38,7 +46,7 @@ class CommentsService {
 
   async deleteComment(commentId, user) {
     try {
-      const commentToDelete = await CommentsRepository.getPostById(commentId);
+      const commentToDelete = await CommentsRepository.getCommentById(commentId);
 
       if (commentToDelete.user) {
         if (user.role === 0 || user._id.equals(commentToDelete.user._id)) {

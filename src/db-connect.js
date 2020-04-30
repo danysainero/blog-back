@@ -1,4 +1,3 @@
-const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 const checkWordsOnLoad = require('./validators/check-ow-onLoad');
 const checkAdminsOnLoad = require('./validators/check-admins-onLoad');
@@ -6,9 +5,6 @@ const checkAdminsOnLoad = require('./validators/check-admins-onLoad');
 const connectToDb = async () => {
         await mongoose.connect(process.env._URL,
             {
-                auth: { 'authSource': 'admin' },
-                user: 'admin',
-                pass: 'admin',
                 useCreateIndex: true,
                 useUnifiedTopology: true,
                 useNewUrlParser: true,

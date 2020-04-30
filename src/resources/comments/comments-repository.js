@@ -24,7 +24,7 @@ class CommentsRepository {
     }
   }
 
-  async getPostById(commentId) {
+  async getCommentById(commentId) {
     try {
       const comment = await commentSchema.findById(commentId);
       return comment;
