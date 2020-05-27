@@ -31,16 +31,18 @@ class CommentsService {
 
   async modifyComment(commentId, comment, user) {
     try {
-      const commentToModify = await CommentsRepository.getPostById(commentId);
+      const commentToModify = await CommentsRepository.getCommentById(commentId);
+     
       if (commentToModify.user) {
         if (user.role === 0 || user._id.equals(commentToModify.user._id)) {
           return await CommentsRepository.modifyComment(commentId, comment);
         } else {
-          return "No tienes permiso";
+          throw new Error("No tienes permiso");
         }
       }
     } catch (err) {
-      return err.message;
+      err.message ='No tienes permiso';
+      throw new Error(err);
     }
   }
 
@@ -50,14 +52,15 @@ class CommentsService {
 
       if (commentToDelete.user) {
         if (user.role === 0 || user._id.equals(commentToDelete.user._id)) {
-          const deletedPost = await CommentsRepository.deleteComment(commentId);
-          return deletedPost;
+          const deletedComment = await CommentsRepository.deleteComment(commentId);
+          return deletedComment;
         } else {
-          return "No tienes permiso";
+          throw new Error("No tienes permiso");
         }
       }
     } catch (err) {
-      return err.message;
+      err.message ='No tienes permiso';
+      throw new Error(err);
     }
   }
 }

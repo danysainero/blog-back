@@ -43,14 +43,10 @@ class PostRepository {
   }
 
   async modifyPost(postID, post) {
+  
+    
     try {
-      const modifiedPost = await postSchema.findByIdAndUpdate(
-        { _id: postID },
-        {
-          $set: { postContent: post.postContent },
-        },
-        { new: true }
-      );
+      const modifiedPost = await postSchema.findByIdAndUpdate(postID, post, {new: true});
       if (!modifiedPost) {
         return "No existe Post con ese Id";
       }

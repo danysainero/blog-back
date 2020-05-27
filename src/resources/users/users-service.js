@@ -13,10 +13,13 @@ class UsersService {
 
   async createUser(newUser) {
     try {
-      return await UsersRepository.createUser(newUser);
+      const newUserResponse = await UsersRepository.createUser(newUser);
+      return newUserResponse;
     } catch (err) {
-      return err.message;
+      err.code === 11000 ? err.message = 'El nombre de usuario ya existe' :  err.message;
+      throw new Error(err);
     }
+   
   }
 
   async deleteUser(userId) {

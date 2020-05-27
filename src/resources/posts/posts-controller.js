@@ -33,28 +33,29 @@ class PostsController {
     }
   }
 
-  async modifyPost(req, res) {
+  async modifyPost(req, res) { 
     const postID = req.params.id;
     const post = req.body;
     const user = req.user;
-    
-    try {
+    console.log(postID, post, user);
+     try {
       const modifiedPost = await PostService.modifyPost(postID, post, user);
-      res.json(modifiedPost);
+      res.status(200).send(modifiedPost);
     } catch (err) {
-      res.status(500).send(err);
-    }
+      res.status(401).send(err);
+      return err;
+    } 
   }
 
-  async deletePost(req, res) {
+  async deletePost(req, res, next) {
     const postID = req.params.id;
     const user = req.user;
-
     try {
       const deletedPost = await PostService.deletePost(postID, user);
-      res.json(deletedPost);
+      res.status(200).send(deletedPost);
     } catch (err) {
-      res.status(500).send(err);
+      res.status(401).send(err);
+      return err;
     }
   }
 }

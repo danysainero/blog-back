@@ -10,7 +10,6 @@ jwtMiddleware.jwtOpts = {
 };
 
 jwtMiddleware.verifyToken = async (token, done) =>{
-
     try {      
       const user = await userSchema.findOne({ userName: token.body.userName }).exec();
       return done(null, user);

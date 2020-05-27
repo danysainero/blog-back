@@ -8,8 +8,7 @@ const CommentSchema = new mongoose.Schema(
       ref: 'user'
     },
     commentAuthorName: {
-      type: String,
-      required: true,
+      type: String
     },
     commentContent: {
       type: String,
