@@ -18,7 +18,6 @@ loginRouter.post(
       const token = jwt.sign({ body }, SECRET_KEY);
       return res.status(200).json({ message: "Auth Passed", token });
     } catch (err) {
-      console.log('err')
       res.status(200).send(err);
     }finally {
       next();

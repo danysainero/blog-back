@@ -14,7 +14,6 @@ class OffensiveWordsIncludes {
           notAllowedOffensiveWords = [...notAllowedOffensiveWords, word];
         }
       });
-      console.log('erere', notAllowedOffensiveWords);
       return notAllowedOffensiveWords;
     } catch (err) {
       return err.message;

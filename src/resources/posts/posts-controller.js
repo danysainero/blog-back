@@ -44,8 +44,6 @@ class PostsController {
       const modifiedPost = await PostService.modifyPost(postID, post, user);
       res.status(200).send(modifiedPost);
     } catch (err) {
-      console.log("controller error", err);
-
       res.status(401).send(err);
       return err;
     }

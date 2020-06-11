@@ -28,11 +28,8 @@ class UsersController {
   }
 
   async findUserByName(req, res, next) {
-    console.log('controller body', req);
     try {      
-     
       const user = await userRepository.findUser(req.body);
-      console.log('controller user', user);
       res.status(200).send(user);
     } catch (err) {
       res.status(403).send(err);

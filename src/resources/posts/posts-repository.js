@@ -48,8 +48,6 @@ class PostRepository {
       if (!modifiedPost) {
         return "No existe Post con ese Id";
       }
-      console.log('eeee', modifiedPost);
-      
       return modifiedPost;
     } catch (err) {
       return err.message;
