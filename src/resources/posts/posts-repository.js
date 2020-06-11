@@ -10,9 +10,7 @@ class PostRepository {
         .find({})
         .populate("comments")
         .populate("user");
-      if (!allPost.length) {
-        return "No existen Posts";
-      }
+      
       return allPost;
     } catch (err) {
       return err.message;
@@ -50,6 +48,8 @@ class PostRepository {
       if (!modifiedPost) {
         return "No existe Post con ese Id";
       }
+      console.log('eeee', modifiedPost);
+      
       return modifiedPost;
     } catch (err) {
       return err.message;

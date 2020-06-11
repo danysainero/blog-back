@@ -24,6 +24,8 @@ class PostsController {
   async createPost(req, res) {
     const newPost = req.body;
     newPost.user = req.user.id;
+    newPost.postAuthorName = req.user.userName;
+    newPost.postAuthorNickName = req.user.userName;
 
     try {
       const createdNewPost = await PostService.createPost(newPost);
@@ -33,18 +35,20 @@ class PostsController {
     }
   }
 
-  async modifyPost(req, res) { 
+  async modifyPost(req, res) {
     const postID = req.params.id;
     const post = req.body;
     const user = req.user;
-    console.log(postID, post, user);
-     try {
+    
+    try {
       const modifiedPost = await PostService.modifyPost(postID, post, user);
       res.status(200).send(modifiedPost);
     } catch (err) {
+      console.log("controller error", err);
+
       res.status(401).send(err);
       return err;
-    } 
+    }
   }
 
   async deletePost(req, res, next) {

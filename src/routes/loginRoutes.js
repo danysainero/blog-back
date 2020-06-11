@@ -12,19 +12,20 @@ passport.use(new BasicStrategy(authMiddleware.verify));
 
 loginRouter.post(
   "", passport.authenticate('basic', { session: false }),
-  (req, res) => {
+  (req, res, next) => {
     try {
-      const body = {userName: req.user.userName }; 
+      const body = {userName: req.user.userName, role: req.user.role, _id: req.user._id }; 
       const token = jwt.sign({ body }, SECRET_KEY);
-
       return res.status(200).json({ message: "Auth Passed", token });
     } catch (err) {
       console.log('err')
-      res.status(500).send(err);
-    }
+      res.status(200).send(err);
+    }finally {
+      next();
+  }
   }
 );
 
-loginRouter.get('/:id', UsersRepository.findUser);
+//loginRouter.get('/:id', UsersRepository.findUser);
 
 module.exports = loginRouter;

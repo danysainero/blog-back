@@ -19,8 +19,6 @@ class UsersController {
 
   async createUser(req, res, next) {
     try {
-    
-      
       const newUser = await userService.createUser(req.body);
       res.status(200).send(newUser);
     } catch (err) {
@@ -29,15 +27,18 @@ class UsersController {
     }
   }
 
- /*  async findUserByName(req, res, next) {
+  async findUserByName(req, res, next) {
+    console.log('controller body', req);
     try {      
-      const userName = await userRepository.findUser(req.body);
-      res.status(200).send(newUser);
+     
+      const user = await userRepository.findUser(req.body);
+      console.log('controller user', user);
+      res.status(200).send(user);
     } catch (err) {
       res.status(403).send(err);
       return err;
     }
-  } */
+  }
 
   async deleteUser(req, res, next) {
     try {

@@ -7,7 +7,6 @@ class CommentsController {
     const comment = req.body;
     comment.user = req.user.id;
     const userDB = await UsersRepository.findUserByID(req.user.id);
-    console.log(userDB);
     
     comment.commentAuthorName = userDB.userName;
     const postId = req.params.postId;
