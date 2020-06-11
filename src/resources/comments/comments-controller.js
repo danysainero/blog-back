@@ -1,11 +1,14 @@
 const CommentsService = require("./comments-service");
-
+const UsersRepository = require("../users/users-repository");
 class CommentsController {
   constructor() {}
 
   async createComment(req, res) {
     const comment = req.body;
     comment.user = req.user.id;
+    const userDB = await UsersRepository.findUserByID(req.user.id);
+    
+    comment.commentAuthorName = userDB.userName;
     const postId = req.params.postId;
 
     try {
@@ -35,10 +38,11 @@ class CommentsController {
         comment,
         user
       );
-      res.json(modifiedComment);
-    } catch (err) {
-      res.status(500).send(err);
-    }
+      res.status(200).send(modifiedComment);
+    }  catch (err) {
+      res.status(401).send(err);
+      return err;
+    } 
   }
 
   async deleteComment(req, res) {
@@ -49,10 +53,11 @@ class CommentsController {
         commentId,
         user
       );
-      res.json(deletedComment);
-    } catch (err) {
-      res.status(500).send(err);
-    }
+      res.status(200).send(deletedComment);
+    }  catch (err) {
+      res.status(401).send(err);
+      return err;
+    } 
   }
 }
 

@@ -1,42 +1,51 @@
-const userSchema = require('./users-schema');
-const initAdminsList = require('../../data/admins-list.json');
+const userSchema = require("./users-schema");
+
 
 class UserRepository {
   constructor() {}
 
   async findUser(userName) {
+     const user = await userSchema.findOne(
+      { userName: userName },
+      { __v: 0, createdAt: 0, updatedAt: 0 }
+    );
+    return user;
+  }
+
+  async findUserByID(id) {
     try {
-      const user = await userSchema.findOne({ userName: userName }, { __v: 0, createdAt: 0, updatedAt: 0});   
+      const user = await userSchema.findOne(
+        { _id: id },
+        { __v: 0, createdAt: 0, updatedAt: 0 }
+      );
       return user;
-    } catch (err) { 
+    } catch (err) {
       return err.message;
     }
   }
- 
+
   async getAllUsers() {
     try {
-      const users = await userSchema.find({}, { __v: 0, createdAt: 0, updatedAt: 0 });
+      const users = await userSchema.find(
+        {},
+        { __v: 0, createdAt: 0, updatedAt: 0 }
+      );
       return users;
-    } catch (err) { 
+    } catch (err) {
       return err.message;
     }
   }
 
   async createUser(newUser) {
-    try {
-      const createdUser = await userSchema(newUser).save();
-      return createdUser;
-    } catch (err) {
-      err.code === 11000 ? err.message = 'El nombre de usuario ya existe' :  err.message;      
-      return err.message;
-    }
+    const createdUser = await userSchema(newUser).save();
+    return createdUser;
   }
 
   async deleteUser(userId) {
     try {
       const deletedUser = await userSchema.findByIdAndDelete(userId);
       return deletedUser;
-    } catch (err) { 
+    } catch (err) {
       return err.message;
     }
   }
@@ -44,7 +53,7 @@ class UserRepository {
   async getAllAdmins() {
     try {
       return await userSchema.find({});
-    } catch (err) { 
+    } catch (err) {
       return err.message;
     }
   }

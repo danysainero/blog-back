@@ -12,7 +12,8 @@ commentsRouter.use(passport.initialize());
 
 commentsRouter.get('/comments', commentsController.getAllComments);
 commentsRouter.post('/comments/:postId',passport.authenticate('jwt', { session: false }), OffensiveWordsMiddleware.OffensiveWordsChecker, commentsController.createComment);
-commentsRouter.put('/comments/:commentId',passport.authenticate('jwt', { session: false }), commentsController.modifyComment);
+// commentsRouter.put('/comments/:commentId',passport.authenticate('jwt', { session: false }), OffensiveWordsMiddleware.OffensiveWordsChecker, commentsController.modifyComment);
+commentsRouter.put('/comments/:commentId',passport.authenticate('jwt', { session: false }), OffensiveWordsMiddleware.OffensiveWordsChecker, commentsController.modifyComment);
 commentsRouter.delete('/comments/:commentId',passport.authenticate('jwt', { session: false }), commentsController.deleteComment);
 
 module.exports = commentsRouter;

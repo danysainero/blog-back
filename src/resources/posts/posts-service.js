@@ -35,26 +35,30 @@ class PostsService {
         const modifiedPost = await PostsRepository.modifyPost(postID, post);
         return modifiedPost;
       } else {
-        return "No puedes modificar Post de otras personas";
+        throw new Error("No tienes permiso");
       }
     } catch (err) {
-      return err.message;
+      err.message ='No tienes permiso';
+      throw new Error(err);
     }
   }
 
   async deletePost(postID, user) {
     try {
-
       const postToDelete = await PostsRepository.getPostById(postID);
 
       if (user.role === 0 || user._id.equals(postToDelete.user._id)) {
-        const deletedPost = await PostsRepository.deletePost(postID, postToDelete.user._id);
+        const deletedPost = await PostsRepository.deletePost(
+          postID,
+          postToDelete.user._id
+        );
         return deletedPost;
       } else {
-        return "No puedes modificar Post de otras personas";
+        throw new Error("No tienes permiso");
       }
     } catch (err) {
-      return err.message;
+      err.message ='service: error de permisos al borrar post';
+      throw new Error(err);
     }
   }
 }
